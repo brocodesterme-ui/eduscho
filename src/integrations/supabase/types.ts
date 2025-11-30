@@ -14,7 +14,154 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chapters: {
+        Row: {
+          chapter_number: number
+          created_at: string
+          description: string | null
+          id: string
+          pdf_url: string | null
+          subject_id: string
+          title: string
+        }
+        Insert: {
+          chapter_number: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          pdf_url?: string | null
+          subject_id: string
+          title: string
+        }
+        Update: {
+          chapter_number?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          pdf_url?: string | null
+          subject_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapters_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_history: {
+        Row: {
+          created_at: string
+          id: string
+          messages: Json
+          teacher_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          teacher_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          teacher_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      subjects: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          chapter_id: string
+          completed: boolean | null
+          created_at: string
+          id: string
+          last_accessed: string | null
+          user_id: string
+        }
+        Insert: {
+          chapter_id: string
+          completed?: boolean | null
+          created_at?: string
+          id?: string
+          last_accessed?: string | null
+          user_id: string
+        }
+        Update: {
+          chapter_id?: string
+          completed?: boolean | null
+          created_at?: string
+          id?: string
+          last_accessed?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_progress_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
