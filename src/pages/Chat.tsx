@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ArrowLeft, Send, Mic, MicOff } from "lucide-react";
+import { ArrowLeft, Send, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,15 +23,32 @@ const Chat = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [isTTSEnabled, setIsTTSEnabled] = useState(true);
+  const [user, setUser] = useState<any>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    checkAuth();
     if (!teacherType) {
       navigate("/");
     }
   }, [teacherType, navigate]);
+
+  const checkAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to use the chat",
+        variant: "destructive",
+      });
+      navigate("/auth");
+    }
+  };
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -105,6 +122,26 @@ const Chat = () => {
             textBuffer = line + "\n" + textBuffer;
             break;
           }
+        }
+      }
+
+      // Convert last assistant message to speech if TTS is enabled
+      if (isTTSEnabled && assistantContent) {
+        try {
+          const { data: ttsData, error: ttsError } = await supabase.functions.invoke(
+            "text-to-speech",
+            {
+              body: { text: assistantContent },
+            }
+          );
+
+          if (!ttsError && ttsData?.audioContent) {
+            const audio = new Audio(`data:audio/mp3;base64,${ttsData.audioContent}`);
+            audioRef.current = audio;
+            audio.play().catch((err) => console.error("Audio playback error:", err));
+          }
+        } catch (ttsError) {
+          console.error("TTS error:", ttsError);
         }
       }
     } catch (error) {
@@ -210,6 +247,19 @@ const Chat = () => {
 
       <div className="border-t border-border bg-card p-4">
         <div className="container mx-auto max-w-4xl flex gap-2">
+          <Button
+            variant={isTTSEnabled ? "default" : "outline"}
+            size="icon"
+            onClick={() => {
+              setIsTTSEnabled(!isTTSEnabled);
+              if (audioRef.current) {
+                audioRef.current.pause();
+              }
+            }}
+            title={isTTSEnabled ? "Voice enabled" : "Voice disabled"}
+          >
+            {isTTSEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+          </Button>
           <Button
             variant={isRecording ? "destructive" : "outline"}
             size="icon"

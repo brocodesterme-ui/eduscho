@@ -1,10 +1,31 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Calculator, Atom, BookOpen, GraduationCap } from "lucide-react";
 import TeacherCard from "@/components/TeacherCard";
+import Navbar from "@/components/Navbar";
 import heroImage from "@/assets/hero-education.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        // Auto-redirect authenticated users away from home
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const teachers = [
     {
@@ -39,6 +60,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background">
         <div className="absolute inset-0 opacity-10">
           <img
