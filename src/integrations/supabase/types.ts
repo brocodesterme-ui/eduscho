@@ -103,6 +103,104 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_questions: {
+        Row: {
+          answered_at: string | null
+          correct_answer: string
+          created_at: string
+          explanation: string | null
+          id: string
+          is_correct: boolean | null
+          options: Json | null
+          question_number: number
+          question_text: string
+          question_type: string
+          session_id: string
+          time_spent_seconds: number | null
+          user_answer: string | null
+        }
+        Insert: {
+          answered_at?: string | null
+          correct_answer: string
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          options?: Json | null
+          question_number: number
+          question_text: string
+          question_type?: string
+          session_id: string
+          time_spent_seconds?: number | null
+          user_answer?: string | null
+        }
+        Update: {
+          answered_at?: string | null
+          correct_answer?: string
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          options?: Json | null
+          question_number?: number
+          question_text?: string
+          question_type?: string
+          session_id?: string
+          time_spent_seconds?: number | null
+          user_answer?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_questions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "quiz_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_sessions: {
+        Row: {
+          completed_at: string | null
+          correct_answers: number
+          created_at: string
+          difficulty: string
+          id: string
+          started_at: string
+          subject: string
+          teacher_type: string
+          time_taken_seconds: number | null
+          total_questions: number
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          difficulty?: string
+          id?: string
+          started_at?: string
+          subject: string
+          teacher_type: string
+          time_taken_seconds?: number | null
+          total_questions?: number
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          difficulty?: string
+          id?: string
+          started_at?: string
+          subject?: string
+          teacher_type?: string
+          time_taken_seconds?: number | null
+          total_questions?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       subjects: {
         Row: {
           created_at: string
@@ -161,6 +259,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_quiz_stats: {
+        Row: {
+          best_score_percentage: number | null
+          correct_answers: number
+          created_at: string
+          current_streak: number
+          id: string
+          last_quiz_at: string | null
+          longest_streak: number
+          teacher_type: string
+          total_questions: number
+          total_quizzes: number
+          total_time_seconds: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          best_score_percentage?: number | null
+          correct_answers?: number
+          created_at?: string
+          current_streak?: number
+          id?: string
+          last_quiz_at?: string | null
+          longest_streak?: number
+          teacher_type: string
+          total_questions?: number
+          total_quizzes?: number
+          total_time_seconds?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          best_score_percentage?: number | null
+          correct_answers?: number
+          created_at?: string
+          current_streak?: number
+          id?: string
+          last_quiz_at?: string | null
+          longest_streak?: number
+          teacher_type?: string
+          total_questions?: number
+          total_quizzes?: number
+          total_time_seconds?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {

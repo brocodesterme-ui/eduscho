@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Volume2, MessageSquare } from "lucide-react";
+import { Volume2, MessageSquare, Brain } from "lucide-react";
 
 interface VirtualTeacherProps {
   name: string;
@@ -11,6 +11,7 @@ interface VirtualTeacherProps {
   description: string;
   specialization: string;
   onStartChat: () => void;
+  onStartQuiz?: () => void;
 }
 
 const VirtualTeacher = ({
@@ -20,6 +21,7 @@ const VirtualTeacher = ({
   description,
   specialization,
   onStartChat,
+  onStartQuiz,
 }: VirtualTeacherProps) => {
   return (
     <Card className="p-6 hover:shadow-lg transition-all group">
@@ -41,13 +43,25 @@ const VirtualTeacher = ({
         <p className="text-sm text-muted-foreground mb-3">{specialization}</p>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
         
-        <Button 
-          onClick={onStartChat} 
-          className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-        >
-          <MessageSquare className="mr-2 h-4 w-4" />
-          Start Learning
-        </Button>
+        <div className="flex gap-2 w-full">
+          <Button 
+            onClick={onStartChat} 
+            variant="outline"
+            className="flex-1"
+          >
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Chat
+          </Button>
+          {onStartQuiz && (
+            <Button 
+              onClick={onStartQuiz} 
+              className="flex-1"
+            >
+              <Brain className="mr-2 h-4 w-4" />
+              Quiz
+            </Button>
+          )}
+        </div>
       </div>
     </Card>
   );

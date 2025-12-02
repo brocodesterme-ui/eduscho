@@ -9,6 +9,8 @@ import Auth from "./pages/Auth";
 import Lessons from "./pages/Lessons";
 import Olympiad from "./pages/Olympiad";
 import NCERTBooks from "./pages/NCERTBooks";
+import Quiz from "./pages/Quiz";
+import Progress from "./pages/Progress";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/lessons" element={<Lessons />} />
           <Route path="/olympiad" element={<Olympiad />} />
           <Route path="/ncert" element={<NCERTBooks />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/progress" element={<Progress />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
