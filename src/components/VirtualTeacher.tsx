@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Volume2, MessageSquare, Brain } from "lucide-react";
+import { Volume2, MessageSquare, Brain, Zap } from "lucide-react";
 
 interface VirtualTeacherProps {
   name: string;
@@ -12,6 +12,7 @@ interface VirtualTeacherProps {
   specialization: string;
   onStartChat: () => void;
   onStartQuiz?: () => void;
+  onStartChallenge?: () => void;
 }
 
 const VirtualTeacher = ({
@@ -22,6 +23,7 @@ const VirtualTeacher = ({
   specialization,
   onStartChat,
   onStartQuiz,
+  onStartChallenge,
 }: VirtualTeacherProps) => {
   return (
     <Card className="p-6 hover:shadow-lg transition-all group">
@@ -43,22 +45,34 @@ const VirtualTeacher = ({
         <p className="text-sm text-muted-foreground mb-3">{specialization}</p>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
         
-        <div className="flex gap-2 w-full">
-          <Button 
-            onClick={onStartChat} 
-            variant="outline"
-            className="flex-1"
-          >
-            <MessageSquare className="mr-2 h-4 w-4" />
-            Chat
-          </Button>
-          {onStartQuiz && (
+        <div className="flex flex-col gap-2 w-full">
+          <div className="flex gap-2">
             <Button 
-              onClick={onStartQuiz} 
+              onClick={onStartChat} 
+              variant="outline"
               className="flex-1"
             >
-              <Brain className="mr-2 h-4 w-4" />
-              Quiz
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Chat
+            </Button>
+            {onStartQuiz && (
+              <Button 
+                onClick={onStartQuiz} 
+                className="flex-1"
+              >
+                <Brain className="mr-2 h-4 w-4" />
+                Quiz
+              </Button>
+            )}
+          </div>
+          {onStartChallenge && (
+            <Button 
+              onClick={onStartChallenge} 
+              variant="secondary"
+              className="w-full"
+            >
+              <Zap className="mr-2 h-4 w-4" />
+              Challenge Mode
             </Button>
           )}
         </div>

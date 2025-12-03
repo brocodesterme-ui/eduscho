@@ -11,32 +11,37 @@ serve(async (req) => {
   }
 
   try {
-    const { text } = await req.json();
+    const { text, voice = "EXAVITQu4vr4xnSDxMaL" } = await req.json();
     console.log("Generating speech for text:", text.substring(0, 50));
 
     if (!text) {
       throw new Error("Text is required");
     }
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    const ELEVENLABS_API_KEY = Deno.env.get("ELEVENLABS_API_KEY");
+    if (!ELEVENLABS_API_KEY) {
+      throw new Error("ELEVENLABS_API_KEY is not configured");
     }
 
-    // Use OpenAI TTS via Lovable AI Gateway
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "tts-1",
-        input: text,
-        voice: "alloy",
-        response_format: "mp3",
-      }),
-    });
+    // Use ElevenLabs TTS API
+    const response = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voice}`,
+      {
+        method: "POST",
+        headers: {
+          "xi-api-key": ELEVENLABS_API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: text,
+          model_id: "eleven_turbo_v2_5",
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.75,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error = await response.text();

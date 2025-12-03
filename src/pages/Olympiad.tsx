@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import VirtualTeacher from "@/components/VirtualTeacher";
 import { olympiadTeachers } from "@/data/olympiadTeachers";
-import { Trophy, Star, Target, Brain, TrendingUp } from "lucide-react";
+import { Trophy, Star, Target, Brain, TrendingUp, Zap, Medal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Olympiad = () => {
@@ -47,6 +47,17 @@ const Olympiad = () => {
     });
   };
 
+  const handleStartChallenge = (teacher: typeof olympiadTeachers[0]) => {
+    navigate("/challenge", {
+      state: {
+        teacherType: teacher.teacherType,
+        teacherName: teacher.name,
+        teacherAvatar: teacher.avatar,
+        subject: teacher.subject,
+      },
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -62,16 +73,24 @@ const Olympiad = () => {
               Learn from expert virtual teachers specialized in various Science and Math Olympiads. 
               Each teacher has voice capabilities and can interact with you in real-time.
             </p>
-            <Button asChild variant="outline">
-              <Link to="/progress">
-                <TrendingUp className="mr-2 h-4 w-4" />
-                View Your Progress
-              </Link>
-            </Button>
+            <div className="flex gap-3 justify-center">
+              <Button asChild variant="outline">
+                <Link to="/progress">
+                  <TrendingUp className="mr-2 h-4 w-4" />
+                  Progress
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link to="/leaderboard">
+                  <Medal className="mr-2 h-4 w-4" />
+                  Leaderboard
+                </Link>
+              </Button>
+            </div>
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
             <div className="bg-card border border-border rounded-lg p-4 text-center">
               <Star className="h-6 w-6 text-primary mx-auto mb-2" />
               <h3 className="font-semibold">Voice Enabled</h3>
@@ -88,9 +107,14 @@ const Olympiad = () => {
               <p className="text-sm text-muted-foreground">Practice with generated problems</p>
             </div>
             <div className="bg-card border border-border rounded-lg p-4 text-center">
+              <Zap className="h-6 w-6 text-primary mx-auto mb-2" />
+              <h3 className="font-semibold">Challenge Mode</h3>
+              <p className="text-sm text-muted-foreground">Timed competitions</p>
+            </div>
+            <div className="bg-card border border-border rounded-lg p-4 text-center">
               <Trophy className="h-6 w-6 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold">Track Progress</h3>
-              <p className="text-sm text-muted-foreground">Monitor your improvement</p>
+              <h3 className="font-semibold">Leaderboard</h3>
+              <p className="text-sm text-muted-foreground">Compete with others</p>
             </div>
           </div>
 
@@ -106,6 +130,7 @@ const Olympiad = () => {
                 specialization={teacher.specialization}
                 onStartChat={() => handleStartChat(teacher)}
                 onStartQuiz={() => handleStartQuiz(teacher)}
+                onStartChallenge={() => handleStartChallenge(teacher)}
               />
             ))}
           </div>
