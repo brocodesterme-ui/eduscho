@@ -10,6 +10,8 @@ import Lessons from "./pages/Lessons";
 import Olympiad from "./pages/Olympiad";
 import OlympiadPrep from "./pages/OlympiadPrep";
 import NCERTBooks from "./pages/NCERTBooks";
+import VideoLessons from "./pages/VideoLessons";
+import StudyPlanner from "./pages/StudyPlanner";
 import Quiz from "./pages/Quiz";
 import Progress from "./pages/Progress";
 import Leaderboard from "./pages/Leaderboard";
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/olympiad" element={<Olympiad />} />
           <Route path="/olympiad-prep" element={<OlympiadPrep />} />
           <Route path="/ncert" element={<NCERTBooks />} />
+          <Route path="/videos" element={<VideoLessons />} />
+          <Route path="/planner" element={<StudyPlanner />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/leaderboard" element={<Leaderboard />} />

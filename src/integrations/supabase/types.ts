@@ -201,6 +201,98 @@ export type Database = {
         }
         Relationships: []
       }
+      study_plans: {
+        Row: {
+          class_level: string
+          created_at: string
+          daily_hours: number
+          id: string
+          subjects: string[]
+          target_date: string
+          target_exam: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          class_level: string
+          created_at?: string
+          daily_hours?: number
+          id?: string
+          subjects?: string[]
+          target_date: string
+          target_exam: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          class_level?: string
+          created_at?: string
+          daily_hours?: number
+          id?: string
+          subjects?: string[]
+          target_date?: string
+          target_exam?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_tasks: {
+        Row: {
+          chapter: string | null
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          duration_minutes: number
+          id: string
+          notes: string | null
+          plan_id: string
+          scheduled_date: string
+          subject: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          chapter?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          notes?: string | null
+          plan_id: string
+          scheduled_date: string
+          subject: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          chapter?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          notes?: string | null
+          plan_id?: string
+          scheduled_date?: string
+          subject?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_tasks_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "study_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subjects: {
         Row: {
           created_at: string
