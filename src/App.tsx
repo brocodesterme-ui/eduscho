@@ -8,6 +8,7 @@ import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
 import Lessons from "./pages/Lessons";
 import Olympiad from "./pages/Olympiad";
+import OlympiadPrep from "./pages/OlympiadPrep";
 import NCERTBooks from "./pages/NCERTBooks";
 import Quiz from "./pages/Quiz";
 import Progress from "./pages/Progress";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/chat" element={<Chat />} />
           <Route path="/lessons" element={<Lessons />} />
           <Route path="/olympiad" element={<Olympiad />} />
+          <Route path="/olympiad-prep" element={<OlympiadPrep />} />
           <Route path="/ncert" element={<NCERTBooks />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/progress" element={<Progress />} />

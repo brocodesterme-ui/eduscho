@@ -54,9 +54,9 @@ const NCERTBooks = () => {
 
           {/* Books by Class */}
           <Tabs defaultValue={classes[0]} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6">
+            <TabsList className="flex flex-wrap h-auto gap-1 mb-6">
               {classes.map((className) => (
-                <TabsTrigger key={className} value={className}>
+                <TabsTrigger key={className} value={className} className="px-4">
                   Class {className}
                 </TabsTrigger>
               ))}

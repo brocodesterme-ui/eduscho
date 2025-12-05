@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
-import { User, LogOut, Trophy, Book, TrendingUp, Medal } from "lucide-react";
+import { User, LogOut, Trophy, Book, TrendingUp, Medal, GraduationCap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Navbar = () => {
@@ -62,7 +62,13 @@ const Navbar = () => {
               <Button variant="ghost" asChild>
                 <Link to="/olympiad">
                   <Trophy className="mr-2 h-4 w-4" />
-                  Olympiad
+                  Teachers
+                </Link>
+              </Button>
+              <Button variant="ghost" asChild>
+                <Link to="/olympiad-prep">
+                  <GraduationCap className="mr-2 h-4 w-4" />
+                  Olympiad Prep
                 </Link>
               </Button>
               <Button variant="ghost" asChild>
