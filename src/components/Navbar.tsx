@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
-import { User, LogOut, Trophy, Book, TrendingUp, Medal, GraduationCap, Play, CalendarDays, Menu } from "lucide-react";
+import { User, LogOut, Trophy, Book, TrendingUp, Medal, GraduationCap, Play, CalendarDays, Menu, BookOpen, FileText } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 
@@ -86,6 +86,18 @@ const Navbar = () => {
                     Progress
                   </Link>
                 </Button>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/flashcards">
+                    <BookOpen className="mr-1 h-4 w-4" />
+                    Flashcards
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/notes">
+                    <FileText className="mr-1 h-4 w-4" />
+                    Notes
+                  </Link>
+                </Button>
               </div>
 
               {/* Mobile Navigation */}
@@ -137,6 +149,18 @@ const Navbar = () => {
                       <Link to="/leaderboard">
                         <Medal className="mr-2 h-4 w-4" />
                         Leaderboard
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/flashcards">
+                        <BookOpen className="mr-2 h-4 w-4" />
+                        Flashcards
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/notes">
+                        <FileText className="mr-2 h-4 w-4" />
+                        Notes
                       </Link>
                     </Button>
                     <Button variant="destructive" className="justify-start mt-4" onClick={handleLogout}>
