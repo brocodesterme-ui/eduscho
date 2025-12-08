@@ -51,15 +51,18 @@ IMPORTANT: Return a valid JSON array with exactly this structure for each questi
   "question_type": "multiple_choice",
   "options": ["A) Option 1", "B) Option 2", "C) Option 3", "D) Option 4"],
   "correct_answer": "A",
-  "explanation": "Detailed explanation of why this is correct"
+  "explanation": "Brief explanation of why this is correct"
 }
 
-Rules:
+CRITICAL RULES:
 - Each question must have exactly 4 options labeled A, B, C, D
 - correct_answer must be just the letter (A, B, C, or D)
 - Make questions challenging but fair
-- Provide clear, educational explanations
-- Return ONLY the JSON array, no other text`;
+- Keep explanations SHORT and SIMPLE (1-2 sentences max)
+- DO NOT use LaTeX, mathematical notation like $x^2$, or special characters
+- Write math expressions in plain text: "x squared" instead of "x^2", "n times m" instead of "n*m"
+- DO NOT use newlines within JSON string values
+- Return ONLY the JSON array, no markdown code blocks, no other text`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -100,15 +103,28 @@ Rules:
     // Parse the JSON from the response
     let questions;
     try {
+      // Clean up the response - remove markdown code blocks and fix common issues
+      let cleanContent = content
+        .replace(/```json\s*/g, '')
+        .replace(/```\s*/g, '')
+        .trim();
+      
       // Try to extract JSON array from the response
-      const jsonMatch = content.match(/\[[\s\S]*\]/);
+      const jsonMatch = cleanContent.match(/\[[\s\S]*\]/);
       if (jsonMatch) {
-        questions = JSON.parse(jsonMatch[0]);
+        // Clean up problematic characters that might break JSON parsing
+        let jsonStr = jsonMatch[0]
+          .replace(/[\x00-\x1F\x7F]/g, ' ') // Remove control characters
+          .replace(/\\\\/g, '\\\\\\\\') // Escape backslashes properly
+          .replace(/\\n/g, ' ') // Replace literal \n with space
+          .replace(/\\t/g, ' '); // Replace literal \t with space
+        
+        questions = JSON.parse(jsonStr);
       } else {
         throw new Error("No JSON array found in response");
       }
     } catch (parseError) {
-      console.error("Failed to parse questions:", parseError, "Content:", content);
+      console.error("Failed to parse questions:", parseError, "Content:", content.substring(0, 500));
       throw new Error("Failed to parse generated questions");
     }
 
