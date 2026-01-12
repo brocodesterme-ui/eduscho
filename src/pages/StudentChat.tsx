@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, MessageCircle, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Send, MessageCircle, Users, Lock, Sparkles, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
 interface Message {
@@ -15,10 +16,12 @@ interface Message {
   user_id: string;
   content: string;
   created_at: string;
-  profiles?: {
-    email: string;
-    full_name: string | null;
-  };
+}
+
+interface PublicProfile {
+  id: string;
+  display_name: string;
+  masked_email: string;
 }
 
 const StudentChat = () => {
@@ -28,7 +31,8 @@ const StudentChat = () => {
   const [newMessage, setNewMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [profiles, setProfiles] = useState<Record<string, { email: string; full_name: string | null }>>({});
+  const [profiles, setProfiles] = useState<Record<string, PublicProfile>>({});
+  const [currentUserProfile, setCurrentUserProfile] = useState<PublicProfile | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -37,7 +41,11 @@ const StudentChat = () => {
   useEffect(() => {
     if (user) {
       fetchMessages();
-      subscribeToMessages();
+      fetchCurrentUserProfile();
+      const unsubscribe = subscribeToMessages();
+      return () => {
+        if (unsubscribe) unsubscribe();
+      };
     }
   }, [user]);
 
@@ -53,6 +61,18 @@ const StudentChat = () => {
     }
   };
 
+  const fetchCurrentUserProfile = async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("public_profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+    if (data) {
+      setCurrentUserProfile(data as PublicProfile);
+    }
+  };
+
   const fetchMessages = async () => {
     const { data: messagesData, error } = await supabase
       .from("student_messages")
@@ -65,17 +85,17 @@ const StudentChat = () => {
       return;
     }
 
-    // Fetch profiles for all users
+    // Fetch public profiles for all users using the view
     const userIds = [...new Set(messagesData?.map(m => m.user_id) || [])];
     if (userIds.length > 0) {
       const { data: profilesData } = await supabase
-        .from("profiles")
-        .select("id, email, full_name")
+        .from("public_profiles")
+        .select("id, display_name, masked_email")
         .in("id", userIds);
 
-      const profileMap: Record<string, { email: string; full_name: string | null }> = {};
+      const profileMap: Record<string, PublicProfile> = {};
       profilesData?.forEach(p => {
-        profileMap[p.id] = { email: p.email, full_name: p.full_name };
+        profileMap[p.id] = p as PublicProfile;
       });
       setProfiles(profileMap);
     }
@@ -99,15 +119,15 @@ const StudentChat = () => {
           // Fetch profile if not cached
           if (!profiles[newMsg.user_id]) {
             const { data: profile } = await supabase
-              .from("profiles")
-              .select("id, email, full_name")
+              .from("public_profiles")
+              .select("id, display_name, masked_email")
               .eq("id", newMsg.user_id)
               .single();
             
             if (profile) {
               setProfiles(prev => ({
                 ...prev,
-                [profile.id]: { email: profile.email, full_name: profile.full_name }
+                [profile.id]: profile as PublicProfile
               }));
             }
           }
@@ -169,8 +189,8 @@ const StudentChat = () => {
     return date.toLocaleDateString();
   };
 
-  const getProfile = (userId: string) => {
-    return profiles[userId] || { email: "Unknown", full_name: null };
+  const getProfile = (userId: string): PublicProfile => {
+    return profiles[userId] || { id: userId, display_name: "Student", masked_email: "" };
   };
 
   // Group messages by date
@@ -184,93 +204,164 @@ const StudentChat = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 rounded-lg bg-primary/10">
-            <MessageCircle className="h-8 w-8 text-primary" />
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-4">
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg">
+              <MessageCircle className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold">Student Chat</h1>
+              <p className="text-muted-foreground">Share notes and ideas with fellow students</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-3xl font-bold">Student Chat</h1>
-            <p className="text-muted-foreground">Share notes and ideas with fellow students</p>
-          </div>
+          <Button asChild className="rounded-full shadow-lg">
+            <Link to="/messages">
+              <Lock className="mr-2 h-4 w-4" />
+              Private Messages
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
 
-        <Card className="h-[calc(100vh-280px)] flex flex-col">
-          <CardHeader className="pb-3 border-b">
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Users className="h-5 w-5" />
-              Community Chat
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-            <ScrollArea className="flex-1 p-4">
-              <div className="space-y-4">
-                {Object.entries(groupedMessages).map(([date, msgs]) => (
-                  <div key={date}>
-                    <div className="flex justify-center mb-4">
-                      <span className="text-xs text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                        {date}
-                      </span>
-                    </div>
-                    {msgs.map((message) => {
-                      const isOwn = message.user_id === user?.id;
-                      const profile = getProfile(message.user_id);
-                      return (
-                        <div
-                          key={message.id}
-                          className={`flex gap-3 mb-3 ${isOwn ? "flex-row-reverse" : ""}`}
-                        >
-                          <Avatar className="h-8 w-8 shrink-0">
-                            <AvatarImage
-                              src={`https://api.dicebear.com/7.x/initials/svg?seed=${profile.email}`}
-                            />
-                            <AvatarFallback>
-                              {profile.full_name?.[0] || profile.email[0]?.toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className={`max-w-[70%] ${isOwn ? "text-right" : ""}`}>
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-medium">
-                                {isOwn ? "You" : profile.full_name || profile.email.split("@")[0]}
-                              </span>
-                              <span className="text-xs text-muted-foreground">
-                                {formatTime(message.created_at)}
-                              </span>
-                            </div>
-                            <div
-                              className={`rounded-lg px-3 py-2 inline-block text-left ${
-                                isOwn
-                                  ? "bg-primary text-primary-foreground"
-                                  : "bg-muted"
-                              }`}
-                            >
-                              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Main Chat */}
+          <Card className="lg:col-span-3 h-[calc(100vh-280px)] flex flex-col border-0 shadow-xl overflow-hidden">
+            <CardHeader className="pb-3 border-b bg-gradient-to-r from-card to-muted/30">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Users className="h-5 w-5 text-primary" />
+                Community Chat
+                <Badge variant="secondary" className="ml-2">
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Public
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
+              <ScrollArea className="flex-1 p-4">
+                <div className="space-y-4">
+                  {Object.entries(groupedMessages).map(([date, msgs]) => (
+                    <div key={date}>
+                      <div className="flex justify-center mb-4">
+                        <span className="text-xs text-muted-foreground bg-muted px-4 py-1.5 rounded-full font-medium">
+                          {date}
+                        </span>
+                      </div>
+                      {msgs.map((message) => {
+                        const isOwn = message.user_id === user?.id;
+                        const profile = getProfile(message.user_id);
+                        return (
+                          <div
+                            key={message.id}
+                            className={`flex gap-3 mb-4 ${isOwn ? "flex-row-reverse" : ""}`}
+                          >
+                            <Avatar className="h-10 w-10 shrink-0 border-2 border-card shadow-md">
+                              <AvatarImage
+                                src={`https://api.dicebear.com/7.x/initials/svg?seed=${profile.display_name}`}
+                              />
+                              <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-primary-foreground font-semibold">
+                                {profile.display_name[0]?.toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className={`max-w-[70%] ${isOwn ? "text-right" : ""}`}>
+                              <div className={`flex items-center gap-2 mb-1 ${isOwn ? "flex-row-reverse" : ""}`}>
+                                <span className="text-sm font-semibold">
+                                  {isOwn ? "You" : profile.display_name}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  {formatTime(message.created_at)}
+                                </span>
+                              </div>
+                              <div
+                                className={`rounded-2xl px-4 py-2.5 inline-block text-left shadow-sm ${
+                                  isOwn
+                                    ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-tr-sm"
+                                    : "bg-card border border-border rounded-tl-sm"
+                                }`}
+                              >
+                                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                  ))}
+                  {messages.length === 0 && (
+                    <div className="text-center py-12">
+                      <MessageCircle className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
+                      <p className="text-muted-foreground">No messages yet. Start the conversation!</p>
+                    </div>
+                  )}
+                  <div ref={scrollRef} />
+                </div>
+              </ScrollArea>
+              <div className="p-4 border-t bg-card/50">
+                <div className="flex gap-3">
+                  <Input
+                    placeholder="Type a message..."
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    disabled={isLoading}
+                    className="rounded-full bg-background"
+                  />
+                  <Button 
+                    onClick={handleSend} 
+                    disabled={isLoading || !newMessage.trim()}
+                    className="rounded-full px-6 shadow-md"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Sidebar */}
+          <div className="space-y-4">
+            <Card className="border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Your Profile</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-3">
+                  <Avatar className="h-12 w-12 border-2 border-primary/20">
+                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${currentUserProfile?.display_name || 'U'}`} />
+                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                      {currentUserProfile?.display_name?.[0] || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold">{currentUserProfile?.display_name || 'Loading...'}</p>
+                    <p className="text-xs text-muted-foreground">{currentUserProfile?.masked_email}</p>
                   </div>
-                ))}
-                <div ref={scrollRef} />
-              </div>
-            </ScrollArea>
-            <div className="p-4 border-t">
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Type a message..."
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  disabled={isLoading}
-                />
-                <Button onClick={handleSend} disabled={isLoading || !newMessage.trim()}>
-                  <Send className="h-4 w-4" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button variant="outline" className="w-full justify-start rounded-xl" asChild>
+                  <Link to="/messages">
+                    <Lock className="mr-2 h-4 w-4" />
+                    Private Messages
+                  </Link>
                 </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                <Button variant="outline" className="w-full justify-start rounded-xl" asChild>
+                  <Link to="/share">
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Invite Friends
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
