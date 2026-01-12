@@ -19,6 +19,8 @@ import Challenge from "./pages/Challenge";
 import Flashcards from "./pages/Flashcards";
 import Notes from "./pages/Notes";
 import StudentChat from "./pages/StudentChat";
+import PrivateMessages from "./pages/PrivateMessages";
+import ShareApp from "./pages/ShareApp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/student-chat" element={<StudentChat />} />
+          <Route path="/messages" element={<PrivateMessages />} />
+          <Route path="/share" element={<ShareApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

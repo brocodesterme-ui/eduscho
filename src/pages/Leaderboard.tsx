@@ -12,8 +12,7 @@ import { Progress } from "@/components/ui/progress";
 
 interface LeaderboardEntry {
   user_id: string;
-  email: string;
-  full_name: string | null;
+  display_name: string;
   total_quizzes: number;
   correct_answers: number;
   total_questions: number;
@@ -84,11 +83,11 @@ const Leaderboard = () => {
 
       if (statsError) throw statsError;
 
-      // Get user profiles for the leaderboard entries
+      // Get public profiles (display names only - no emails exposed)
       const userIds = [...new Set(stats?.map(s => s.user_id) || [])];
       const { data: profiles, error: profilesError } = await supabase
-        .from("profiles")
-        .select("id, email, full_name")
+        .from("public_profiles")
+        .select("id, display_name")
         .in("id", userIds);
 
       if (profilesError) throw profilesError;
@@ -100,8 +99,7 @@ const Leaderboard = () => {
             const profile = profiles?.find(p => p.id === s.user_id);
             return {
               ...s,
-              email: profile?.email || "Unknown",
-              full_name: profile?.full_name,
+              display_name: profile?.display_name || "Student",
             };
           });
 
@@ -136,8 +134,7 @@ const Leaderboard = () => {
       } else {
         userMap.set(stat.user_id, {
           user_id: stat.user_id,
-          email: profile?.email || "Unknown",
-          full_name: profile?.full_name,
+          display_name: profile?.display_name || "Student",
           total_quizzes: stat.total_quizzes,
           correct_answers: stat.correct_answers,
           total_questions: stat.total_questions,
@@ -187,8 +184,8 @@ const Leaderboard = () => {
         {/* Header with stats */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary/10 rounded-xl">
-              <Trophy className="h-8 w-8 text-primary" />
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 shadow-xl">
+              <Trophy className="h-8 w-8 text-white" />
             </div>
             <div>
               <h1 className="text-3xl font-bold">Leaderboard</h1>
@@ -196,7 +193,7 @@ const Leaderboard = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg">
+            <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-xl">
               <Users className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium">{leaderboard.length} Students</span>
             </div>
@@ -209,7 +206,7 @@ const Leaderboard = () => {
               <TabsTrigger 
                 key={subject.value} 
                 value={subject.value}
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-200"
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-200 rounded-lg"
               >
                 <span className="mr-1.5">{subject.icon}</span>
                 {subject.label}
@@ -223,12 +220,14 @@ const Leaderboard = () => {
               <div className="hidden md:flex justify-center items-end gap-4 mb-8">
                 {/* Second Place */}
                 <div className="flex flex-col items-center">
-                  <Avatar className="h-16 w-16 border-4 border-gray-400 mb-2">
-                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[1]?.email}`} />
-                    <AvatarFallback>{leaderboard[1]?.full_name?.[0] || leaderboard[1]?.email[0].toUpperCase()}</AvatarFallback>
+                  <Avatar className="h-16 w-16 border-4 border-gray-400 mb-2 shadow-lg">
+                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[1]?.display_name}`} />
+                    <AvatarFallback className="bg-gradient-to-br from-gray-400 to-gray-500 text-white font-bold">
+                      {leaderboard[1]?.display_name?.[0]?.toUpperCase()}
+                    </AvatarFallback>
                   </Avatar>
-                  <p className="font-medium text-sm truncate max-w-24">{leaderboard[1]?.full_name || leaderboard[1]?.email.split("@")[0]}</p>
-                  <div className="bg-gray-400 text-white px-6 py-8 rounded-t-lg mt-2 flex flex-col items-center">
+                  <p className="font-medium text-sm truncate max-w-24">{leaderboard[1]?.display_name}</p>
+                  <div className="bg-gradient-to-b from-gray-400 to-gray-500 text-white px-6 py-8 rounded-t-lg mt-2 flex flex-col items-center shadow-lg">
                     <Medal className="h-8 w-8 mb-1" />
                     <span className="text-2xl font-bold">2</span>
                     <span className="text-sm">{leaderboard[1]?.correct_answers} pts</span>
@@ -239,13 +238,15 @@ const Leaderboard = () => {
                 <div className="flex flex-col items-center">
                   <div className="relative">
                     <Sparkles className="absolute -top-2 -right-2 h-5 w-5 text-yellow-400 animate-pulse" />
-                    <Avatar className="h-20 w-20 border-4 border-yellow-500 mb-2">
-                      <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[0]?.email}`} />
-                      <AvatarFallback>{leaderboard[0]?.full_name?.[0] || leaderboard[0]?.email[0].toUpperCase()}</AvatarFallback>
+                    <Avatar className="h-20 w-20 border-4 border-yellow-500 mb-2 shadow-xl">
+                      <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[0]?.display_name}`} />
+                      <AvatarFallback className="bg-gradient-to-br from-yellow-400 to-amber-500 text-white font-bold text-2xl">
+                        {leaderboard[0]?.display_name?.[0]?.toUpperCase()}
+                      </AvatarFallback>
                     </Avatar>
                   </div>
-                  <p className="font-medium truncate max-w-28">{leaderboard[0]?.full_name || leaderboard[0]?.email.split("@")[0]}</p>
-                  <div className="bg-gradient-to-b from-yellow-400 to-yellow-600 text-white px-8 py-12 rounded-t-lg mt-2 flex flex-col items-center">
+                  <p className="font-medium truncate max-w-28">{leaderboard[0]?.display_name}</p>
+                  <div className="bg-gradient-to-b from-yellow-400 to-yellow-600 text-white px-8 py-12 rounded-t-lg mt-2 flex flex-col items-center shadow-xl">
                     <Crown className="h-10 w-10 mb-1" />
                     <span className="text-3xl font-bold">1</span>
                     <span className="text-sm">{leaderboard[0]?.correct_answers} pts</span>
@@ -254,12 +255,14 @@ const Leaderboard = () => {
                 
                 {/* Third Place */}
                 <div className="flex flex-col items-center">
-                  <Avatar className="h-14 w-14 border-4 border-amber-600 mb-2">
-                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[2]?.email}`} />
-                    <AvatarFallback>{leaderboard[2]?.full_name?.[0] || leaderboard[2]?.email[0].toUpperCase()}</AvatarFallback>
+                  <Avatar className="h-14 w-14 border-4 border-amber-600 mb-2 shadow-lg">
+                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${leaderboard[2]?.display_name}`} />
+                    <AvatarFallback className="bg-gradient-to-br from-amber-500 to-amber-600 text-white font-bold">
+                      {leaderboard[2]?.display_name?.[0]?.toUpperCase()}
+                    </AvatarFallback>
                   </Avatar>
-                  <p className="font-medium text-sm truncate max-w-24">{leaderboard[2]?.full_name || leaderboard[2]?.email.split("@")[0]}</p>
-                  <div className="bg-amber-600 text-white px-6 py-6 rounded-t-lg mt-2 flex flex-col items-center">
+                  <p className="font-medium text-sm truncate max-w-24">{leaderboard[2]?.display_name}</p>
+                  <div className="bg-gradient-to-b from-amber-500 to-amber-700 text-white px-6 py-6 rounded-t-lg mt-2 flex flex-col items-center shadow-lg">
                     <Award className="h-7 w-7 mb-1" />
                     <span className="text-xl font-bold">3</span>
                     <span className="text-sm">{leaderboard[2]?.correct_answers} pts</span>
@@ -268,8 +271,8 @@ const Leaderboard = () => {
               </div>
             )}
 
-            <Card className="border-0 shadow-lg">
-              <CardHeader className="border-b bg-muted/30">
+            <Card className="border-0 shadow-xl overflow-hidden">
+              <CardHeader className="border-b bg-gradient-to-r from-card to-muted/30">
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
                   Rankings
@@ -313,18 +316,18 @@ const Leaderboard = () => {
                           <div className="w-10 flex justify-center">
                             {getRankIcon(index)}
                           </div>
-                          <Avatar className={`h-12 w-12 border-2 ${index < 3 ? "border-primary/50" : "border-transparent"}`}>
+                          <Avatar className={`h-12 w-12 border-2 shadow-sm ${index < 3 ? "border-primary/50" : "border-transparent"}`}>
                             <AvatarImage
-                              src={`https://api.dicebear.com/7.x/initials/svg?seed=${entry.email}`}
+                              src={`https://api.dicebear.com/7.x/initials/svg?seed=${entry.display_name}`}
                             />
-                            <AvatarFallback>
-                              {entry.full_name?.[0] || entry.email[0].toUpperCase()}
+                            <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-primary-foreground font-semibold">
+                              {entry.display_name?.[0]?.toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
-                              <p className="font-medium truncate">
-                                {entry.full_name || entry.email.split("@")[0]}
+                              <p className="font-semibold truncate">
+                                {entry.display_name}
                               </p>
                               {entry.user_id === user?.id && (
                                 <Badge variant="secondary" className="shrink-0">You</Badge>

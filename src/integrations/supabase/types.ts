@@ -79,9 +79,72 @@ export type Database = {
         }
         Relationships: []
       }
+      private_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string | null
+          participant_1: string
+          participant_2: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          participant_1: string
+          participant_2: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          participant_1?: string
+          participant_2?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      private_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          read_at: string | null
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "private_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "private_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
+          display_name: string | null
           email: string
           full_name: string | null
           id: string
@@ -89,6 +152,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          display_name?: string | null
           email: string
           full_name?: string | null
           id: string
@@ -96,6 +160,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          display_name?: string | null
           email?: string
           full_name?: string | null
           id?: string
@@ -423,10 +488,33 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_profiles: {
+        Row: {
+          created_at: string | null
+          display_name: string | null
+          id: string | null
+          masked_email: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          display_name?: never
+          id?: string | null
+          masked_email?: never
+        }
+        Update: {
+          created_at?: string | null
+          display_name?: never
+          id?: string | null
+          masked_email?: never
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      is_conversation_participant: {
+        Args: { conv_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
