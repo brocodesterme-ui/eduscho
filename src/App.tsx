@@ -21,6 +21,8 @@ import Notes from "./pages/Notes";
 import StudentChat from "./pages/StudentChat";
 import PrivateMessages from "./pages/PrivateMessages";
 import ShareApp from "./pages/ShareApp";
+import Profile from "./pages/Profile";
+import Games from "./pages/Games";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -50,6 +52,9 @@ const App = () => (
           <Route path="/student-chat" element={<StudentChat />} />
           <Route path="/messages" element={<PrivateMessages />} />
           <Route path="/share" element={<ShareApp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/games" element={<Games />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

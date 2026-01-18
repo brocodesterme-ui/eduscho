@@ -79,6 +79,66 @@ export type Database = {
         }
         Relationships: []
       }
+      friends: {
+        Row: {
+          created_at: string
+          friend_id: string
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          friend_id: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          friend_id?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      game_scores: {
+        Row: {
+          created_at: string
+          game_type: string
+          id: string
+          level: number | null
+          metadata: Json | null
+          score: number
+          time_seconds: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          game_type: string
+          id?: string
+          level?: number | null
+          metadata?: Json | null
+          score?: number
+          time_seconds?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          game_type?: string
+          id?: string
+          level?: number | null
+          metadata?: Json | null
+          score?: number
+          time_seconds?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       private_conversations: {
         Row: {
           created_at: string
@@ -143,25 +203,37 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_url: string | null
+          bio: string | null
+          class_level: string | null
           created_at: string
           display_name: string | null
           email: string
+          favorite_subjects: string[] | null
           full_name: string | null
           id: string
           updated_at: string
         }
         Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          class_level?: string | null
           created_at?: string
           display_name?: string | null
           email: string
+          favorite_subjects?: string[] | null
           full_name?: string | null
           id: string
           updated_at?: string
         }
         Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          class_level?: string | null
           created_at?: string
           display_name?: string | null
           email?: string
+          favorite_subjects?: string[] | null
           full_name?: string | null
           id?: string
           updated_at?: string
@@ -490,20 +562,32 @@ export type Database = {
     Views: {
       public_profiles: {
         Row: {
+          avatar_url: string | null
+          bio: string | null
+          class_level: string | null
           created_at: string | null
           display_name: string | null
+          favorite_subjects: string[] | null
           id: string | null
           masked_email: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          class_level?: string | null
           created_at?: string | null
           display_name?: never
+          favorite_subjects?: string[] | null
           id?: string | null
           masked_email?: never
         }
         Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          class_level?: string | null
           created_at?: string | null
           display_name?: never
+          favorite_subjects?: string[] | null
           id?: string | null
           masked_email?: never
         }
