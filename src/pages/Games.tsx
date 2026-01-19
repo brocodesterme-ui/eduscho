@@ -8,12 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Gamepad2, Brain, Puzzle, Calculator, Zap, Trophy, 
-  Star, Clock, Play, Target, Lightbulb, Sparkles
+  Star, Clock, Play, Target, Lightbulb, Sparkles, Keyboard, Atom
 } from "lucide-react";
 import MathGame from "@/components/games/MathGame";
 import MemoryGame from "@/components/games/MemoryGame";
 import WordPuzzle from "@/components/games/WordPuzzle";
 import SudokuGame from "@/components/games/SudokuGame";
+import TypingGame from "@/components/games/TypingGame";
+import PeriodicTableQuiz from "@/components/games/PeriodicTableQuiz";
 
 interface GameScore {
   game_type: string;
@@ -110,6 +112,24 @@ const Games = () => {
       color: "from-orange-500 to-red-500",
       difficulty: "Hard",
       category: "Logic"
+    },
+    {
+      id: "typing",
+      title: "Typing Speed Test",
+      description: "Improve your typing speed with educational sentences. Type fast and accurate!",
+      icon: Keyboard,
+      color: "from-indigo-500 to-violet-500",
+      difficulty: "Medium",
+      category: "Speed"
+    },
+    {
+      id: "periodic-table",
+      title: "Periodic Table Quiz",
+      description: "Test your chemistry knowledge! Identify elements by their symbols and properties.",
+      icon: Atom,
+      color: "from-teal-500 to-cyan-500",
+      difficulty: "Medium",
+      category: "Science"
     }
   ];
 
@@ -150,6 +170,16 @@ const Games = () => {
           {activeGame === "sudoku" && (
             <SudokuGame onComplete={(score, level, time) => {
               saveScore("sudoku", score, level, time);
+            }} />
+          )}
+          {activeGame === "typing" && (
+            <TypingGame onComplete={(score, level, time) => {
+              saveScore("typing", score, level, time);
+            }} />
+          )}
+          {activeGame === "periodic-table" && (
+            <PeriodicTableQuiz onComplete={(score, level, time) => {
+              saveScore("periodic-table", score, level, time);
             }} />
           )}
         </div>

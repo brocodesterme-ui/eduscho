@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { 
   User, LogOut, Trophy, Book, TrendingUp, Medal, GraduationCap, 
   Play, CalendarDays, Menu, BookOpen, FileText, MessageCircle, 
-  Sparkles, ChevronDown, X
+  Sparkles, ChevronDown, X, Gamepad2, UserCircle, Mail, Share2
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
@@ -60,13 +60,14 @@ const Navbar = () => {
   const navLinks = [
     { path: "/ncert", icon: Book, label: "NCERT" },
     { path: "/videos", icon: Play, label: "Videos" },
+    { path: "/games", icon: Gamepad2, label: "Games" },
     { path: "/olympiad-prep", icon: GraduationCap, label: "Olympiad" },
     { path: "/planner", icon: CalendarDays, label: "Planner" },
-    { path: "/progress", icon: TrendingUp, label: "Progress" },
     { path: "/flashcards", icon: BookOpen, label: "Flashcards" },
     { path: "/notes", icon: FileText, label: "Notes" },
+    { path: "/messages", icon: Mail, label: "Messages" },
+    { path: "/student-chat", icon: MessageCircle, label: "Community" },
     { path: "/leaderboard", icon: Medal, label: "Leaderboard" },
-    { path: "/student-chat", icon: MessageCircle, label: "Chat" },
   ];
 
   return (
@@ -234,13 +235,21 @@ const Navbar = () => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
+                    <UserCircle className="mr-2 h-4 w-4" />
+                    My Profile
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/progress")}>
                     <TrendingUp className="mr-2 h-4 w-4" />
                     My Progress
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/leaderboard")}>
-                    <Medal className="mr-2 h-4 w-4" />
-                    Leaderboard
+                  <DropdownMenuItem onClick={() => navigate("/messages")}>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Messages
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/share")}>
+                    <Share2 className="mr-2 h-4 w-4" />
+                    Share App
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
