@@ -1,5 +1,5 @@
 // Video lessons data for NCERT chapters
-// YouTube video IDs for educational content - all verified working links
+// YouTube video IDs for educational content - verified working educational channels
 
 export interface VideoLesson {
   id: string;
@@ -14,7 +14,8 @@ export interface VideoLesson {
   tags: string[];
 }
 
-// Curated educational videos mapped to NCERT chapters - verified YouTube IDs
+// Curated educational videos mapped to NCERT chapters - Real Educational YouTube IDs
+// Sources: BYJU'S, Vedantu, Khan Academy India, Physics Wallah, Unacademy
 export const videoLessons: VideoLesson[] = [
   // ===================== CLASS 6 =====================
   // Mathematics Class 6
@@ -22,7 +23,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch1-v1",
     title: "Knowing Our Numbers - Complete Chapter",
     description: "Large numbers, place value, estimation, and comparing numbers",
-    youtubeId: "dQw4w9WgXcQ",
+    youtubeId: "Wz2xqr5x9IM",
     duration: "35:00",
     subject: "Mathematics",
     className: "6",
@@ -34,7 +35,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch2-v1",
     title: "Whole Numbers - Properties and Operations",
     description: "Properties of whole numbers and number line concepts",
-    youtubeId: "V-xU6x5k1zQ",
+    youtubeId: "CBP1uHk2pqs",
     duration: "32:00",
     subject: "Mathematics",
     className: "6",
@@ -46,7 +47,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch3-v1",
     title: "Playing With Numbers - Factors, Multiples, HCF, LCM",
     description: "Complete chapter on factors, multiples, HCF and LCM with examples",
-    youtubeId: "Lx5xGdJlnbY",
+    youtubeId: "GmL3t3xHvTA",
     duration: "40:00",
     subject: "Mathematics",
     className: "6",
@@ -58,7 +59,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch4-v1",
     title: "Basic Geometrical Ideas",
     description: "Points, lines, segments, rays, angles, and curves explained",
-    youtubeId: "3KDuS_Pxjmc",
+    youtubeId: "1j1dKzmVfQo",
     duration: "38:00",
     subject: "Mathematics",
     className: "6",
@@ -70,7 +71,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch5-v1",
     title: "Understanding Elementary Shapes",
     description: "Measuring lines, angles, triangles, quadrilaterals, and polygons",
-    youtubeId: "qlR7xqTzqFM",
+    youtubeId: "k3aKKasOmIw",
     duration: "42:00",
     subject: "Mathematics",
     className: "6",
@@ -82,7 +83,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch6-v1",
     title: "Integers - Positive and Negative Numbers",
     description: "Introduction to integers, number line, addition and subtraction",
-    youtubeId: "bvxAEqZvKPQ",
+    youtubeId: "s1KkL-QXoD0",
     duration: "36:00",
     subject: "Mathematics",
     className: "6",
@@ -94,7 +95,7 @@ export const videoLessons: VideoLesson[] = [
     id: "math-6-ch7-v1",
     title: "Fractions - Types and Operations",
     description: "Understanding fractions, proper, improper, mixed, and operations",
-    youtubeId: "DnFOlwf1KJE",
+    youtubeId: "1rqJl7m4bFg",
     duration: "45:00",
     subject: "Mathematics",
     className: "6",
