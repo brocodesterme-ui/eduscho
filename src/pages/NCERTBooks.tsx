@@ -40,7 +40,7 @@ const NCERTBooks = () => {
               <div>
                 <h1 className="text-4xl font-bold">NCERT Books</h1>
                 <p className="text-muted-foreground">
-                  Access official NCERT textbooks for Classes 9-12
+                  Access official NCERT textbooks for Classes 6-12
                 </p>
               </div>
             </div>
