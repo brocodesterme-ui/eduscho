@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
-import { videoLessons, getAllClasses, getSubjectsByClass, getVideosBySubject, VideoLesson } from "@/data/videoLessons";
+import { videoLessons, getAllClasses, getSubjectsByClass, getVideosBySubject, VideoLesson, getYoutubeId } from "@/data/videoLessons";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -111,7 +111,7 @@ const VideoLessons = () => {
                     onClick={() => handlePlayVideo(video)}
                   >
                     <img 
-                      src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+                      src={`https://img.youtube.com/vi/${getYoutubeId(video.youtubeUrl)}/mqdefault.jpg`}
                       alt={video.title}
                       className="w-full h-full object-cover"
                     />
@@ -172,7 +172,7 @@ const VideoLessons = () => {
                     <iframe
                       width="100%"
                       height="100%"
-                      src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                      src={`https://www.youtube.com/embed/${getYoutubeId(selectedVideo.youtubeUrl)}?autoplay=1`}
                       title={selectedVideo.title}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
