@@ -796,6 +796,836 @@ export const videoLessons: VideoLesson[] = [
     chapter: 6,
     difficulty: "advanced",
     tags: ["derivatives", "maxima", "minima"]
+  },
+
+  // ===================== ADDITIONAL CHAPTERS =====================
+
+  // Mathematics Class 6 - More Chapters
+  {
+    id: "math-6-ch4-v1",
+    title: "Basic Geometrical Ideas",
+    description: "Points, lines, curves, polygons, and angles",
+    youtubeUrl: "https://www.youtube.com/watch?v=dT7OQVMQP8I",
+    duration: "34:00",
+    subject: "Mathematics",
+    className: "6",
+    chapter: 4,
+    difficulty: "beginner",
+    tags: ["geometry", "lines", "angles", "polygons"]
+  },
+  {
+    id: "math-6-ch5-v1",
+    title: "Understanding Elementary Shapes",
+    description: "Measuring line segments, angles, and triangles",
+    youtubeUrl: "https://www.youtube.com/watch?v=GQCP6LVJv1I",
+    duration: "36:00",
+    subject: "Mathematics",
+    className: "6",
+    chapter: 5,
+    difficulty: "beginner",
+    tags: ["shapes", "triangles", "angles"]
+  },
+  {
+    id: "math-6-ch6-v1",
+    title: "Integers",
+    description: "Introduction to integers and operations",
+    youtubeUrl: "https://www.youtube.com/watch?v=Dag3YoPFNek",
+    duration: "38:00",
+    subject: "Mathematics",
+    className: "6",
+    chapter: 6,
+    difficulty: "beginner",
+    tags: ["integers", "negative numbers", "number line"]
+  },
+  {
+    id: "math-6-ch7-v1",
+    title: "Fractions",
+    description: "Types of fractions and comparison",
+    youtubeUrl: "https://www.youtube.com/watch?v=qN_hXmR5yuw",
+    duration: "35:00",
+    subject: "Mathematics",
+    className: "6",
+    chapter: 7,
+    difficulty: "beginner",
+    tags: ["fractions", "proper", "improper", "mixed"]
+  },
+
+  // Science Class 6 - More Chapters
+  {
+    id: "science-6-ch4-v1",
+    title: "Sorting Materials into Groups",
+    description: "Classification of materials based on properties",
+    youtubeUrl: "https://www.youtube.com/watch?v=F4_IQS6sV6M",
+    duration: "28:00",
+    subject: "Science",
+    className: "6",
+    chapter: 4,
+    difficulty: "beginner",
+    tags: ["materials", "classification", "properties"]
+  },
+  {
+    id: "science-6-ch5-v1",
+    title: "Separation of Substances",
+    description: "Methods of separating mixtures",
+    youtubeUrl: "https://www.youtube.com/watch?v=3KdPz7d5a4E",
+    duration: "30:00",
+    subject: "Science",
+    className: "6",
+    chapter: 5,
+    difficulty: "beginner",
+    tags: ["separation", "filtration", "evaporation"]
+  },
+  {
+    id: "science-6-ch6-v1",
+    title: "Changes Around Us",
+    description: "Reversible and irreversible changes",
+    youtubeUrl: "https://www.youtube.com/watch?v=DP6tJv-SdTw",
+    duration: "25:00",
+    subject: "Science",
+    className: "6",
+    chapter: 6,
+    difficulty: "beginner",
+    tags: ["changes", "reversible", "irreversible"]
+  },
+  {
+    id: "science-6-ch7-v1",
+    title: "Getting to Know Plants",
+    description: "Parts of a plant and their functions",
+    youtubeUrl: "https://www.youtube.com/watch?v=fXqSAVTRvCA",
+    duration: "32:00",
+    subject: "Science",
+    className: "6",
+    chapter: 7,
+    difficulty: "beginner",
+    tags: ["plants", "roots", "stem", "leaves"]
+  },
+
+  // Mathematics Class 7 - More Chapters
+  {
+    id: "math-7-ch4-v1",
+    title: "Simple Equations",
+    description: "Solving simple linear equations",
+    youtubeUrl: "https://www.youtube.com/watch?v=lnAOB6GYLGM",
+    duration: "36:00",
+    subject: "Mathematics",
+    className: "7",
+    chapter: 4,
+    difficulty: "beginner",
+    tags: ["equations", "variables", "solving"]
+  },
+  {
+    id: "math-7-ch5-v1",
+    title: "Lines and Angles",
+    description: "Types of angles and properties of parallel lines",
+    youtubeUrl: "https://www.youtube.com/watch?v=QxaVn-BwiG4",
+    duration: "40:00",
+    subject: "Mathematics",
+    className: "7",
+    chapter: 5,
+    difficulty: "beginner",
+    tags: ["lines", "angles", "parallel", "transversal"]
+  },
+  {
+    id: "math-7-ch6-v1",
+    title: "The Triangle and its Properties",
+    description: "Properties of triangles and angle sum property",
+    youtubeUrl: "https://www.youtube.com/watch?v=sEL99K4vDEo",
+    duration: "42:00",
+    subject: "Mathematics",
+    className: "7",
+    chapter: 6,
+    difficulty: "beginner",
+    tags: ["triangle", "properties", "angles"]
+  },
+
+  // Science Class 7 - More Chapters
+  {
+    id: "science-7-ch4-v1",
+    title: "Heat",
+    description: "Temperature, conduction, convection, and radiation",
+    youtubeUrl: "https://www.youtube.com/watch?v=TvlsIoFPdPI",
+    duration: "38:00",
+    subject: "Science",
+    className: "7",
+    chapter: 4,
+    difficulty: "beginner",
+    tags: ["heat", "temperature", "conduction"]
+  },
+  {
+    id: "science-7-ch5-v1",
+    title: "Acids, Bases and Salts",
+    description: "Introduction to acids, bases, and indicators",
+    youtubeUrl: "https://www.youtube.com/watch?v=zJT1XjBhyao",
+    duration: "35:00",
+    subject: "Science",
+    className: "7",
+    chapter: 5,
+    difficulty: "beginner",
+    tags: ["acids", "bases", "indicators"]
+  },
+  {
+    id: "science-7-ch6-v1",
+    title: "Physical and Chemical Changes",
+    description: "Differences between physical and chemical changes",
+    youtubeUrl: "https://www.youtube.com/watch?v=I56_i3JDZ4g",
+    duration: "32:00",
+    subject: "Science",
+    className: "7",
+    chapter: 6,
+    difficulty: "beginner",
+    tags: ["physical change", "chemical change", "rusting"]
+  },
+
+  // Mathematics Class 8 - More Chapters
+  {
+    id: "math-8-ch4-v1",
+    title: "Practical Geometry",
+    description: "Constructing quadrilaterals with given conditions",
+    youtubeUrl: "https://www.youtube.com/watch?v=bYjqx7aMXis",
+    duration: "35:00",
+    subject: "Mathematics",
+    className: "8",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["geometry", "construction", "quadrilateral"]
+  },
+  {
+    id: "math-8-ch5-v1",
+    title: "Data Handling",
+    description: "Pie charts, bar graphs, and probability",
+    youtubeUrl: "https://www.youtube.com/watch?v=UpQ4BTZJ0xI",
+    duration: "40:00",
+    subject: "Mathematics",
+    className: "8",
+    chapter: 5,
+    difficulty: "intermediate",
+    tags: ["data", "pie chart", "probability"]
+  },
+  {
+    id: "math-8-ch6-v1",
+    title: "Squares and Square Roots",
+    description: "Properties and methods to find square roots",
+    youtubeUrl: "https://www.youtube.com/watch?v=2k9pdR-BSBA",
+    duration: "42:00",
+    subject: "Mathematics",
+    className: "8",
+    chapter: 6,
+    difficulty: "intermediate",
+    tags: ["squares", "square roots", "patterns"]
+  },
+
+  // Science Class 8 - More Chapters
+  {
+    id: "science-8-ch4-v1",
+    title: "Materials: Metals and Non-Metals",
+    description: "Properties and reactions of metals and non-metals",
+    youtubeUrl: "https://www.youtube.com/watch?v=ypXq8xg24j0",
+    duration: "40:00",
+    subject: "Science",
+    className: "8",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["metals", "non-metals", "reactions"]
+  },
+  {
+    id: "science-8-ch5-v1",
+    title: "Coal and Petroleum",
+    description: "Fossil fuels and their conservation",
+    youtubeUrl: "https://www.youtube.com/watch?v=bGxwB3JReqQ",
+    duration: "35:00",
+    subject: "Science",
+    className: "8",
+    chapter: 5,
+    difficulty: "beginner",
+    tags: ["coal", "petroleum", "fossil fuels"]
+  },
+  {
+    id: "science-8-ch6-v1",
+    title: "Combustion and Flame",
+    description: "Types of combustion and structure of flame",
+    youtubeUrl: "https://www.youtube.com/watch?v=U7OqGN1Bj6E",
+    duration: "30:00",
+    subject: "Science",
+    className: "8",
+    chapter: 6,
+    difficulty: "beginner",
+    tags: ["combustion", "flame", "fuel"]
+  },
+
+  // Mathematics Class 9 - More Chapters
+  {
+    id: "math-9-ch4-v1",
+    title: "Linear Equations in Two Variables",
+    description: "Graph of linear equations and solutions",
+    youtubeUrl: "https://www.youtube.com/watch?v=XDxOJv4rsMo",
+    duration: "45:00",
+    subject: "Mathematics",
+    className: "9",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["linear equations", "two variables", "graph"]
+  },
+  {
+    id: "math-9-ch5-v1",
+    title: "Introduction to Euclid's Geometry",
+    description: "Euclid's axioms and postulates",
+    youtubeUrl: "https://www.youtube.com/watch?v=UGWq7njqJxE",
+    duration: "35:00",
+    subject: "Mathematics",
+    className: "9",
+    chapter: 5,
+    difficulty: "intermediate",
+    tags: ["euclid", "axioms", "postulates"]
+  },
+  {
+    id: "math-9-ch6-v1",
+    title: "Lines and Angles",
+    description: "Properties of angles formed by parallel lines",
+    youtubeUrl: "https://www.youtube.com/watch?v=q4fW2snPbq8",
+    duration: "42:00",
+    subject: "Mathematics",
+    className: "9",
+    chapter: 6,
+    difficulty: "intermediate",
+    tags: ["lines", "angles", "parallel lines"]
+  },
+  {
+    id: "math-9-ch7-v1",
+    title: "Triangles",
+    description: "Congruence of triangles and criteria",
+    youtubeUrl: "https://www.youtube.com/watch?v=4bvnHsmFbOo",
+    duration: "48:00",
+    subject: "Mathematics",
+    className: "9",
+    chapter: 7,
+    difficulty: "intermediate",
+    tags: ["triangles", "congruence", "SAS", "ASA"]
+  },
+
+  // Science Class 9 - More Chapters
+  {
+    id: "science-9-ch4-v1",
+    title: "Structure of the Atom",
+    description: "Thomson, Rutherford, and Bohr models",
+    youtubeUrl: "https://www.youtube.com/watch?v=bBZKI08SldM",
+    duration: "50:00",
+    subject: "Science",
+    className: "9",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["atom", "models", "electrons"]
+  },
+  {
+    id: "science-9-ch5-v1",
+    title: "The Fundamental Unit of Life",
+    description: "Cell structure and organelles",
+    youtubeUrl: "https://www.youtube.com/watch?v=j1cqh7Vk7rw",
+    duration: "45:00",
+    subject: "Science",
+    className: "9",
+    chapter: 5,
+    difficulty: "intermediate",
+    tags: ["cell", "organelles", "nucleus"]
+  },
+  {
+    id: "science-9-ch6-v1",
+    title: "Tissues",
+    description: "Plant and animal tissues",
+    youtubeUrl: "https://www.youtube.com/watch?v=K4MrBN09I4E",
+    duration: "42:00",
+    subject: "Science",
+    className: "9",
+    chapter: 6,
+    difficulty: "intermediate",
+    tags: ["tissues", "meristematic", "epithelial"]
+  },
+  {
+    id: "science-9-ch7-v1",
+    title: "Diversity in Living Organisms",
+    description: "Classification and biodiversity",
+    youtubeUrl: "https://www.youtube.com/watch?v=z6YYBwcSJac",
+    duration: "48:00",
+    subject: "Science",
+    className: "9",
+    chapter: 7,
+    difficulty: "intermediate",
+    tags: ["diversity", "classification", "kingdom"]
+  },
+  {
+    id: "science-9-ch8-v1",
+    title: "Motion",
+    description: "Distance, displacement, speed, velocity, and acceleration",
+    youtubeUrl: "https://www.youtube.com/watch?v=F3soHfDjvME",
+    duration: "55:00",
+    subject: "Science",
+    className: "9",
+    chapter: 8,
+    difficulty: "intermediate",
+    tags: ["motion", "speed", "velocity", "acceleration"]
+  },
+  {
+    id: "science-9-ch9-v1",
+    title: "Force and Laws of Motion",
+    description: "Newton's laws and inertia",
+    youtubeUrl: "https://www.youtube.com/watch?v=DfznnKUwywQ",
+    duration: "50:00",
+    subject: "Science",
+    className: "9",
+    chapter: 9,
+    difficulty: "intermediate",
+    tags: ["force", "newton", "inertia"]
+  },
+  {
+    id: "science-9-ch10-v1",
+    title: "Gravitation",
+    description: "Universal law of gravitation and free fall",
+    youtubeUrl: "https://www.youtube.com/watch?v=FMCO3_Yvktg",
+    duration: "48:00",
+    subject: "Science",
+    className: "9",
+    chapter: 10,
+    difficulty: "intermediate",
+    tags: ["gravitation", "free fall", "weight"]
+  },
+
+  // Mathematics Class 10 - More Chapters
+  {
+    id: "math-10-ch6-v1",
+    title: "Triangles",
+    description: "Similar triangles and criteria for similarity",
+    youtubeUrl: "https://www.youtube.com/watch?v=dA28RLESxaE",
+    duration: "55:00",
+    subject: "Mathematics",
+    className: "10",
+    chapter: 6,
+    difficulty: "intermediate",
+    tags: ["triangles", "similarity", "AAA", "SAS"]
+  },
+  {
+    id: "math-10-ch7-v1",
+    title: "Coordinate Geometry",
+    description: "Distance formula, section formula, area of triangle",
+    youtubeUrl: "https://www.youtube.com/watch?v=q1aGP7n6Htg",
+    duration: "50:00",
+    subject: "Mathematics",
+    className: "10",
+    chapter: 7,
+    difficulty: "intermediate",
+    tags: ["coordinate", "distance", "section formula"]
+  },
+  {
+    id: "math-10-ch8-v1",
+    title: "Introduction to Trigonometry",
+    description: "Trigonometric ratios and identities",
+    youtubeUrl: "https://www.youtube.com/watch?v=FtPi0LzgefA",
+    duration: "52:00",
+    subject: "Mathematics",
+    className: "10",
+    chapter: 8,
+    difficulty: "intermediate",
+    tags: ["trigonometry", "ratios", "identities"]
+  },
+  {
+    id: "math-10-ch9-v1",
+    title: "Some Applications of Trigonometry",
+    description: "Heights and distances problems",
+    youtubeUrl: "https://www.youtube.com/watch?v=WwUvLlhkibE",
+    duration: "45:00",
+    subject: "Mathematics",
+    className: "10",
+    chapter: 9,
+    difficulty: "intermediate",
+    tags: ["heights", "distances", "angle of elevation"]
+  },
+  {
+    id: "math-10-ch10-v1",
+    title: "Circles",
+    description: "Tangent to a circle and number of tangents",
+    youtubeUrl: "https://www.youtube.com/watch?v=u5bLcN1b1TA",
+    duration: "48:00",
+    subject: "Mathematics",
+    className: "10",
+    chapter: 10,
+    difficulty: "intermediate",
+    tags: ["circles", "tangent", "secant"]
+  },
+
+  // Science Class 10 - More Chapters
+  {
+    id: "science-10-ch7-v1",
+    title: "Control and Coordination",
+    description: "Nervous system and hormones",
+    youtubeUrl: "https://www.youtube.com/watch?v=xIDDRKjhQ6U",
+    duration: "52:00",
+    subject: "Science",
+    className: "10",
+    chapter: 7,
+    difficulty: "intermediate",
+    tags: ["nervous system", "hormones", "coordination"]
+  },
+  {
+    id: "science-10-ch8-v1",
+    title: "How do Organisms Reproduce?",
+    description: "Modes of reproduction in plants and animals",
+    youtubeUrl: "https://www.youtube.com/watch?v=n9IxVxVr2CQ",
+    duration: "55:00",
+    subject: "Science",
+    className: "10",
+    chapter: 8,
+    difficulty: "intermediate",
+    tags: ["reproduction", "fission", "budding"]
+  },
+  {
+    id: "science-10-ch9-v1",
+    title: "Heredity and Evolution",
+    description: "Mendel's laws and evolution",
+    youtubeUrl: "https://www.youtube.com/watch?v=0DnFmfYXh7g",
+    duration: "50:00",
+    subject: "Science",
+    className: "10",
+    chapter: 9,
+    difficulty: "intermediate",
+    tags: ["heredity", "genetics", "evolution"]
+  },
+  {
+    id: "science-10-ch10-v1",
+    title: "Light - Reflection and Refraction",
+    description: "Laws of reflection, mirrors, lenses",
+    youtubeUrl: "https://www.youtube.com/watch?v=1WJMxBn4ZMU",
+    duration: "58:00",
+    subject: "Science",
+    className: "10",
+    chapter: 10,
+    difficulty: "intermediate",
+    tags: ["light", "reflection", "refraction", "lens"]
+  },
+  {
+    id: "science-10-ch11-v1",
+    title: "Human Eye and Colourful World",
+    description: "Defects of vision and atmospheric refraction",
+    youtubeUrl: "https://www.youtube.com/watch?v=j4x0p-BiTOo",
+    duration: "45:00",
+    subject: "Science",
+    className: "10",
+    chapter: 11,
+    difficulty: "intermediate",
+    tags: ["eye", "vision", "prism", "rainbow"]
+  },
+  {
+    id: "science-10-ch12-v1",
+    title: "Electricity",
+    description: "Ohm's law, resistance, and circuits",
+    youtubeUrl: "https://www.youtube.com/watch?v=9gSWmBPRfBo",
+    duration: "60:00",
+    subject: "Science",
+    className: "10",
+    chapter: 12,
+    difficulty: "intermediate",
+    tags: ["electricity", "ohm", "resistance", "circuits"]
+  },
+  {
+    id: "science-10-ch13-v1",
+    title: "Magnetic Effects of Electric Current",
+    description: "Electromagnets and electromagnetic induction",
+    youtubeUrl: "https://www.youtube.com/watch?v=ynxgJR-XL-E",
+    duration: "52:00",
+    subject: "Science",
+    className: "10",
+    chapter: 13,
+    difficulty: "intermediate",
+    tags: ["magnetic", "electromagnet", "induction"]
+  },
+
+  // Physics Class 11 - More Chapters
+  {
+    id: "physics-11-ch6-v1",
+    title: "Work, Energy and Power",
+    description: "Work-energy theorem and conservation of energy",
+    youtubeUrl: "https://www.youtube.com/watch?v=PKGPGKZ5JSU",
+    duration: "55:00",
+    subject: "Physics",
+    className: "11",
+    chapter: 6,
+    difficulty: "intermediate",
+    tags: ["work", "energy", "power"]
+  },
+  {
+    id: "physics-11-ch7-v1",
+    title: "System of Particles and Rotational Motion",
+    description: "Centre of mass and moment of inertia",
+    youtubeUrl: "https://www.youtube.com/watch?v=KrN_pVxiF0o",
+    duration: "62:00",
+    subject: "Physics",
+    className: "11",
+    chapter: 7,
+    difficulty: "advanced",
+    tags: ["rotation", "centre of mass", "torque"]
+  },
+  {
+    id: "physics-11-ch8-v1",
+    title: "Gravitation",
+    description: "Kepler's laws and gravitational potential energy",
+    youtubeUrl: "https://www.youtube.com/watch?v=e0MIBC62dDY",
+    duration: "55:00",
+    subject: "Physics",
+    className: "11",
+    chapter: 8,
+    difficulty: "advanced",
+    tags: ["gravitation", "kepler", "satellites"]
+  },
+
+  // Chemistry Class 11 - More Chapters
+  {
+    id: "chemistry-11-ch4-v1",
+    title: "Chemical Bonding and Molecular Structure",
+    description: "Ionic, covalent bonds and VSEPR theory",
+    youtubeUrl: "https://www.youtube.com/watch?v=UVf0Fke0_wE",
+    duration: "58:00",
+    subject: "Chemistry",
+    className: "11",
+    chapter: 4,
+    difficulty: "advanced",
+    tags: ["bonding", "ionic", "covalent", "VSEPR"]
+  },
+  {
+    id: "chemistry-11-ch5-v1",
+    title: "States of Matter",
+    description: "Gas laws and kinetic theory",
+    youtubeUrl: "https://www.youtube.com/watch?v=TEPfNWqxVII",
+    duration: "50:00",
+    subject: "Chemistry",
+    className: "11",
+    chapter: 5,
+    difficulty: "intermediate",
+    tags: ["gas laws", "kinetic theory", "ideal gas"]
+  },
+  {
+    id: "chemistry-11-ch6-v1",
+    title: "Thermodynamics",
+    description: "First and second law of thermodynamics",
+    youtubeUrl: "https://www.youtube.com/watch?v=wLcGJyoqIew",
+    duration: "60:00",
+    subject: "Chemistry",
+    className: "11",
+    chapter: 6,
+    difficulty: "advanced",
+    tags: ["thermodynamics", "enthalpy", "entropy"]
+  },
+
+  // Biology Class 11 - More Chapters
+  {
+    id: "biology-11-ch4-v1",
+    title: "Animal Kingdom",
+    description: "Classification of animals with examples",
+    youtubeUrl: "https://www.youtube.com/watch?v=fgN52Y7LeMI",
+    duration: "55:00",
+    subject: "Biology",
+    className: "11",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["animals", "phylum", "classification"]
+  },
+  {
+    id: "biology-11-ch5-v1",
+    title: "Morphology of Flowering Plants",
+    description: "Root, stem, leaf, and flower structure",
+    youtubeUrl: "https://www.youtube.com/watch?v=axh6wXRUQls",
+    duration: "50:00",
+    subject: "Biology",
+    className: "11",
+    chapter: 5,
+    difficulty: "intermediate",
+    tags: ["morphology", "root", "stem", "flower"]
+  },
+
+  // Mathematics Class 11 - More Chapters
+  {
+    id: "math-11-ch2-v1",
+    title: "Relations and Functions",
+    description: "Cartesian product and types of relations",
+    youtubeUrl: "https://www.youtube.com/watch?v=BXGJQbni4YA",
+    duration: "48:00",
+    subject: "Mathematics",
+    className: "11",
+    chapter: 2,
+    difficulty: "intermediate",
+    tags: ["relations", "functions", "domain", "range"]
+  },
+  {
+    id: "math-11-ch3-v1",
+    title: "Trigonometric Functions",
+    description: "Trigonometric ratios and identities",
+    youtubeUrl: "https://www.youtube.com/watch?v=VL24Se3GNx4",
+    duration: "55:00",
+    subject: "Mathematics",
+    className: "11",
+    chapter: 3,
+    difficulty: "intermediate",
+    tags: ["trigonometry", "ratios", "identities"]
+  },
+  {
+    id: "math-11-ch4-v1",
+    title: "Principle of Mathematical Induction",
+    description: "Proving statements using induction",
+    youtubeUrl: "https://www.youtube.com/watch?v=wINW6aNH9cE",
+    duration: "42:00",
+    subject: "Mathematics",
+    className: "11",
+    chapter: 4,
+    difficulty: "advanced",
+    tags: ["induction", "proof", "mathematical"]
+  },
+
+  // Physics Class 12 - More Chapters
+  {
+    id: "physics-12-ch4-v1",
+    title: "Moving Charges and Magnetism",
+    description: "Biot-Savart law and Ampere's law",
+    youtubeUrl: "https://www.youtube.com/watch?v=EwbbBKJq9YY",
+    duration: "58:00",
+    subject: "Physics",
+    className: "12",
+    chapter: 4,
+    difficulty: "advanced",
+    tags: ["magnetism", "biot-savart", "ampere"]
+  },
+  {
+    id: "physics-12-ch5-v1",
+    title: "Magnetism and Matter",
+    description: "Magnetic properties of materials",
+    youtubeUrl: "https://www.youtube.com/watch?v=mWX2QfZRcuQ",
+    duration: "48:00",
+    subject: "Physics",
+    className: "12",
+    chapter: 5,
+    difficulty: "advanced",
+    tags: ["magnetism", "diamagnetic", "paramagnetic"]
+  },
+  {
+    id: "physics-12-ch6-v1",
+    title: "Electromagnetic Induction",
+    description: "Faraday's laws and Lenz's law",
+    youtubeUrl: "https://www.youtube.com/watch?v=EXx-3Y9Y0pM",
+    duration: "55:00",
+    subject: "Physics",
+    className: "12",
+    chapter: 6,
+    difficulty: "advanced",
+    tags: ["EMI", "faraday", "lenz"]
+  },
+
+  // Chemistry Class 12 - More Chapters
+  {
+    id: "chemistry-12-ch4-v1",
+    title: "Chemical Kinetics",
+    description: "Rate of reaction and order of reaction",
+    youtubeUrl: "https://www.youtube.com/watch?v=pIY8-MQqmhI",
+    duration: "55:00",
+    subject: "Chemistry",
+    className: "12",
+    chapter: 4,
+    difficulty: "advanced",
+    tags: ["kinetics", "rate", "order"]
+  },
+  {
+    id: "chemistry-12-ch5-v1",
+    title: "Surface Chemistry",
+    description: "Adsorption, catalysis, and colloids",
+    youtubeUrl: "https://www.youtube.com/watch?v=TfZlQc9V9Gk",
+    duration: "50:00",
+    subject: "Chemistry",
+    className: "12",
+    chapter: 5,
+    difficulty: "advanced",
+    tags: ["adsorption", "catalysis", "colloids"]
+  },
+
+  // Biology Class 12 - More Chapters
+  {
+    id: "biology-12-ch3-v1",
+    title: "Human Reproduction",
+    description: "Male and female reproductive systems",
+    youtubeUrl: "https://www.youtube.com/watch?v=aMm5T7IWl3g",
+    duration: "55:00",
+    subject: "Biology",
+    className: "12",
+    chapter: 3,
+    difficulty: "intermediate",
+    tags: ["reproduction", "gametogenesis", "fertilization"]
+  },
+  {
+    id: "biology-12-ch4-v1",
+    title: "Reproductive Health",
+    description: "Birth control and STDs",
+    youtubeUrl: "https://www.youtube.com/watch?v=RzKEPE0Z6bI",
+    duration: "40:00",
+    subject: "Biology",
+    className: "12",
+    chapter: 4,
+    difficulty: "intermediate",
+    tags: ["reproductive health", "contraception", "STD"]
+  },
+  {
+    id: "biology-12-ch5-v1",
+    title: "Principles of Inheritance and Variation",
+    description: "Mendel's laws and chromosomal theory",
+    youtubeUrl: "https://www.youtube.com/watch?v=CBezq1fFUEA",
+    duration: "60:00",
+    subject: "Biology",
+    className: "12",
+    chapter: 5,
+    difficulty: "advanced",
+    tags: ["inheritance", "mendel", "genetics"]
+  },
+
+  // Mathematics Class 12 - More Chapters
+  {
+    id: "math-12-ch7-v1",
+    title: "Integrals",
+    description: "Indefinite and definite integrals with methods",
+    youtubeUrl: "https://www.youtube.com/watch?v=O8GZVc8XEOQ",
+    duration: "65:00",
+    subject: "Mathematics",
+    className: "12",
+    chapter: 7,
+    difficulty: "advanced",
+    tags: ["integrals", "integration", "definite"]
+  },
+  {
+    id: "math-12-ch8-v1",
+    title: "Application of Integrals",
+    description: "Area under curves and between curves",
+    youtubeUrl: "https://www.youtube.com/watch?v=t0hkFMFg3Pg",
+    duration: "50:00",
+    subject: "Mathematics",
+    className: "12",
+    chapter: 8,
+    difficulty: "advanced",
+    tags: ["area", "curves", "integration"]
+  },
+  {
+    id: "math-12-ch9-v1",
+    title: "Differential Equations",
+    description: "Formation and solution of differential equations",
+    youtubeUrl: "https://www.youtube.com/watch?v=kJAl9H3xNB4",
+    duration: "58:00",
+    subject: "Mathematics",
+    className: "12",
+    chapter: 9,
+    difficulty: "advanced",
+    tags: ["differential equations", "order", "degree"]
+  },
+  {
+    id: "math-12-ch10-v1",
+    title: "Vector Algebra",
+    description: "Types of vectors, dot and cross product",
+    youtubeUrl: "https://www.youtube.com/watch?v=F37j1lGxPPE",
+    duration: "55:00",
+    subject: "Mathematics",
+    className: "12",
+    chapter: 10,
+    difficulty: "advanced",
+    tags: ["vectors", "dot product", "cross product"]
   }
 ];
 
