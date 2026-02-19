@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Download, Share2, Sparkles, BookOpen, Trophy, Brain, TrendingUp, MessageCircle, Mic } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import demoVideo from "/demo-video.mp4";
+import demoPoster from "@/assets/demo-poster.jpg";
 
 const features = [
   { icon: Mic, label: "AI Voice Teachers", desc: "Talk to Math, Science, Language & General AI tutors" },
-  { icon: BookOpen, label: "NCERT Books", desc: "Access all NCERT textbooks from Class 9–12" },
+  { icon: BookOpen, label: "NCERT Books", desc: "Access all NCERT textbooks from Class 6–12" },
   { icon: Trophy, label: "Olympiad Prep", desc: "IMO, IPhO, IChO prep with AI-powered guidance" },
   { icon: Brain, label: "AI Quizzes", desc: "Auto-generated quizzes tailored to your level" },
   { icon: TrendingUp, label: "Progress Tracking", desc: "Monitor your learning journey with analytics" },
@@ -56,8 +56,12 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Video Player */}
-      <section className="container mx-auto px-4 pb-16">
+      {/* Teaser Video */}
+      <section className="container mx-auto px-4 pb-10">
+        <div className="text-center mb-6">
+          <Badge variant="outline" className="mb-2">⚡ 5-Second Teaser</Badge>
+          <h2 className="text-2xl font-bold">Quick Teaser</h2>
+        </div>
         <div className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border/50 bg-card">
           <video
             className="w-full aspect-video"
@@ -65,45 +69,68 @@ const Demo = () => {
             autoPlay
             muted
             loop
-            poster="/placeholder.svg"
+            poster={demoPoster}
           >
-            <source src={demoVideo} type="video/mp4" />
+            <source src="/teaser-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
+      </section>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center mt-8">
-          <Button
-            size="lg"
-            className="rounded-full px-8"
-            onClick={() => navigate("/auth")}
+      {/* Full Demo Video */}
+      <section className="container mx-auto px-4 pb-10">
+        <div className="text-center mb-6">
+          <Badge variant="outline" className="mb-2">🎬 Full Demo</Badge>
+          <h2 className="text-2xl font-bold">Full Feature Demo</h2>
+        </div>
+        <div className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border/50 bg-card">
+          <video
+            className="w-full aspect-video"
+            controls
+            muted
+            loop
+            poster={demoPoster}
           >
-            <Play className="mr-2 h-5 w-5" />
-            Start Learning Free
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full px-8"
-            onClick={handleShare}
-          >
-            <Share2 className="mr-2 h-5 w-5" />
-            Share App
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full px-8"
-            asChild
-          >
-            <a href={demoVideo} download="EduVoice-Demo.mp4">
-              <Download className="mr-2 h-5 w-5" />
-              Download Video
-            </a>
-          </Button>
+            <source src="/demo-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
+
+      {/* App Screenshots Collage */}
+      <section className="container mx-auto px-4 pb-10">
+        <div className="text-center mb-6">
+          <Badge variant="outline" className="mb-2">📸 App Preview</Badge>
+          <h2 className="text-2xl font-bold">Feature Screenshots</h2>
+        </div>
+        <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border/50">
+          <img src={demoPoster} alt="EduVoice App Screenshots" className="w-full" />
+        </div>
+      </section>
+
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-4 justify-center pb-16">
+        <Button size="lg" className="rounded-full px-8" onClick={() => navigate("/auth")}>
+          <Play className="mr-2 h-5 w-5" />
+          Start Learning Free
+        </Button>
+        <Button size="lg" variant="outline" className="rounded-full px-8" onClick={handleShare}>
+          <Share2 className="mr-2 h-5 w-5" />
+          Share App
+        </Button>
+        <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
+          <a href="/teaser-video.mp4" download="EduVoice-Teaser.mp4">
+            <Download className="mr-2 h-5 w-5" />
+            Download Teaser
+          </a>
+        </Button>
+        <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
+          <a href="/demo-video.mp4" download="EduVoice-Demo.mp4">
+            <Download className="mr-2 h-5 w-5" />
+            Download Full Demo
+          </a>
+        </Button>
+      </div>
 
       {/* Features Highlight */}
       <section className="container mx-auto px-4 pb-20">
