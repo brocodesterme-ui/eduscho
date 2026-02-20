@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import TeacherCard from "@/components/TeacherCard";
 import Navbar from "@/components/Navbar";
-import heroImage from "@/assets/hero-education.jpg";
+// Hero video is loaded from public/hero-video.mp4
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -86,17 +86,17 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
+        {/* Video Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/10" />
-          <div className="absolute top-0 left-0 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
-        </div>
-        
-        {/* Hero Image Overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <img src={heroImage} alt="Education background" className="w-full h-full object-cover" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            src="/hero-video.mp4"
+          />
+          <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
         </div>
 
         <div className={`relative container mx-auto px-4 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
