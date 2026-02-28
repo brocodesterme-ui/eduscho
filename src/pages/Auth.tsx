@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,17 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+
+  // Clear any corrupted auth session on mount
+  useEffect(() => {
+    supabase.auth.getSession().then(({ error }) => {
+      if (error) {
+        // Clear corrupted session data
+        localStorage.removeItem(`sb-bywadbngfzeeroeayxmf-auth-token`);
+        console.log("Cleared corrupted auth session");
+      }
+    });
+  }, []);
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
