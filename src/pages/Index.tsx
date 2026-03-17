@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import TeacherCard from "@/components/TeacherCard";
 import Navbar from "@/components/Navbar";
+import OnboardingTutorial from "@/components/OnboardingTutorial";
 // Hero video is loaded from public/hero-video.mp4
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -83,6 +84,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
+      <OnboardingTutorial />
       
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
