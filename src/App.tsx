@@ -2,7 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import PageTransition from "@/components/PageTransition";
 import Index from "./pages/Index";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
@@ -28,38 +29,48 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <PageTransition key={location.pathname}>
+      <Routes location={location}>
+        <Route path="/" element={<Index />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/lessons" element={<Lessons />} />
+        <Route path="/olympiad" element={<Olympiad />} />
+        <Route path="/olympiad-prep" element={<OlympiadPrep />} />
+        <Route path="/ncert" element={<NCERTBooks />} />
+        <Route path="/videos" element={<VideoLessons />} />
+        <Route path="/planner" element={<StudyPlanner />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/progress" element={<Progress />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/challenge" element={<Challenge />} />
+        <Route path="/flashcards" element={<Flashcards />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/student-chat" element={<StudentChat />} />
+        <Route path="/messages" element={<PrivateMessages />} />
+        <Route path="/share" element={<ShareApp />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/demo" element={<Demo />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </PageTransition>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/lessons" element={<Lessons />} />
-          <Route path="/olympiad" element={<Olympiad />} />
-          <Route path="/olympiad-prep" element={<OlympiadPrep />} />
-          <Route path="/ncert" element={<NCERTBooks />} />
-          <Route path="/videos" element={<VideoLessons />} />
-          <Route path="/planner" element={<StudyPlanner />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/progress" element={<Progress />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/challenge" element={<Challenge />} />
-          <Route path="/flashcards" element={<Flashcards />} />
-          <Route path="/notes" element={<Notes />} />
-          <Route path="/student-chat" element={<StudentChat />} />
-          <Route path="/messages" element={<PrivateMessages />} />
-          <Route path="/share" element={<ShareApp />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/demo" element={<Demo />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AnimatedRoutes />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
