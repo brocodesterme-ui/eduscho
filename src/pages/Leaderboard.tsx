@@ -134,7 +134,7 @@ const Leaderboard = () => {
       } else {
         userMap.set(stat.user_id, {
           user_id: stat.user_id,
-          display_name: profile?.display_name || "Student",
+          display_name: profile?.display_name || profile?.masked_email || "Student",
           total_quizzes: stat.total_quizzes,
           correct_answers: stat.correct_answers,
           total_questions: stat.total_questions,
