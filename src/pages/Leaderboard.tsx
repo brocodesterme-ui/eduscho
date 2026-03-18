@@ -87,7 +87,7 @@ const Leaderboard = () => {
       const userIds = [...new Set(stats?.map(s => s.user_id) || [])];
       const { data: profiles, error: profilesError } = await supabase
         .from("public_profiles")
-        .select("id, display_name")
+        .select("id, display_name, masked_email")
         .in("id", userIds);
 
       if (profilesError) throw profilesError;
@@ -99,7 +99,7 @@ const Leaderboard = () => {
             const profile = profiles?.find(p => p.id === s.user_id);
             return {
               ...s,
-              display_name: profile?.display_name || "Student",
+              display_name: profile?.display_name || profile?.masked_email || "Student",
             };
           });
 
@@ -134,7 +134,7 @@ const Leaderboard = () => {
       } else {
         userMap.set(stat.user_id, {
           user_id: stat.user_id,
-          display_name: profile?.display_name || "Student",
+          display_name: profile?.display_name || profile?.masked_email || "Student",
           total_quizzes: stat.total_quizzes,
           correct_answers: stat.correct_answers,
           total_questions: stat.total_questions,
