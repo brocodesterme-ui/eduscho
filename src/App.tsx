@@ -71,6 +71,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AnimatedBackground />
         <AnimatedRoutes />
       </BrowserRouter>
     </TooltipProvider>
