@@ -87,7 +87,7 @@ const Leaderboard = () => {
       const userIds = [...new Set(stats?.map(s => s.user_id) || [])];
       const { data: profiles, error: profilesError } = await supabase
         .from("public_profiles")
-        .select("id, display_name")
+        .select("id, display_name, masked_email")
         .in("id", userIds);
 
       if (profilesError) throw profilesError;
