@@ -99,7 +99,7 @@ const Leaderboard = () => {
             const profile = profiles?.find(p => p.id === s.user_id);
             return {
               ...s,
-              display_name: profile?.display_name || "Student",
+              display_name: profile?.display_name || profile?.masked_email || "Student",
             };
           });
 
