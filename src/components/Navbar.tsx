@@ -18,6 +18,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -93,7 +94,8 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {user ? (
             <>
               {/* Desktop Navigation */}
