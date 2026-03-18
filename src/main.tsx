@@ -25,4 +25,8 @@ if (authKey) {
 
 inject();
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+    <App />
+  </ThemeProvider>
+);
