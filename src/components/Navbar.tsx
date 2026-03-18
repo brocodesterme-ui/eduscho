@@ -94,8 +94,8 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          {user ? (
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
             <>
               {/* Desktop Navigation */}
               <div className="hidden xl:flex items-center gap-1 bg-card/50 backdrop-blur-sm rounded-full p-1 border border-border/50">
