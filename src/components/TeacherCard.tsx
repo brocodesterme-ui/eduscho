@@ -21,15 +21,15 @@ const TeacherCard = ({
 }: TeacherCardProps) => {
   return (
     <Card 
-      className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-gradient-to-br from-card to-card/80 hover:-translate-y-2"
+      className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer glass-card rounded-3xl hover:-translate-y-2"
       onClick={onSelect}
       style={{ animationDelay: `${delay}ms` }}
     >
       {/* Gradient overlay on hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-[0.07] transition-opacity duration-500`} />
       
       {/* Decorative blur */}
-      <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${gradient} rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`} />
+      <div className={`absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br ${gradient} rounded-full blur-3xl opacity-20 group-hover:opacity-40 group-hover:scale-150 transition-all duration-700`} />
       
       <CardHeader className="relative pb-2">
         <div className="flex items-start gap-4">
@@ -55,7 +55,7 @@ const TeacherCard = ({
         </CardDescription>
         
         <Button 
-          className="w-full group/btn relative overflow-hidden"
+          className="w-full group/btn relative overflow-hidden rounded-xl"
           variant="secondary"
         >
           <span className="relative z-10 flex items-center justify-center w-full">
