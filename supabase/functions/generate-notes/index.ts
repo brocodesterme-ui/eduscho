@@ -25,24 +25,31 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log(`Generating visual notes for ${topic} - ${subject} Class ${className}`);
+    console.log(`Generating text notes for ${topic} - ${subject} Class ${className}`);
 
-    const imagePrompt = `Create a beautiful, educational study notes infographic for Class ${className} ${subject} on the topic: "${topic}".
+    const prompt = `You are an expert NCERT teacher for Class ${className} ${subject}. Generate comprehensive, well-structured study notes on the topic: "${topic}".
 
-The image should be a well-organized study note page with:
-- Clear title at the top with the topic name
-- Key concepts in organized sections with headers
-- Important formulas or definitions in highlighted boxes
-- Simple diagrams or illustrations where applicable
-- Bullet points for key takeaways
-- Colorful but professional design suitable for students
-- Easy to read fonts and clear hierarchy
-- Memory tips or mnemonics if applicable
+Return the notes as a JSON array of pages. Each page should have:
+- "title": the page/section heading
+- "content": an array of content blocks
 
-Style: Educational infographic, clean layout, vibrant colors, professional look.
-Ultra high resolution, 16:9 aspect ratio suitable for studying.`;
+Each content block is an object with:
+- "type": one of "heading", "paragraph", "bullets", "formula", "definition", "tip", "example"
+- "text": the text content (for heading, paragraph, formula, definition, tip, example)
+- "items": array of strings (only for bullets type)
+- "term": the term being defined (only for definition type)
+- "label": a short label like "Remember", "Pro Tip", "Important" (only for tip type)
 
-    // Generate image using Lovable AI with Gemini image model
+Create 4-6 pages covering the topic thoroughly. Include:
+- Key concepts and explanations
+- Important formulas (if applicable)
+- Definitions of key terms
+- Examples with solutions
+- Memory tips and mnemonics
+- Summary/key takeaways
+
+IMPORTANT: Return ONLY valid JSON, no markdown fences. The response must be a JSON array of page objects.`;
+
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -50,14 +57,17 @@ Ultra high resolution, 16:9 aspect ratio suitable for studying.`;
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash-image-preview",
+        model: "google/gemini-2.5-flash",
         messages: [
           {
+            role: "system",
+            content: "You are a study notes generator. Always respond with valid JSON only. No markdown, no code fences, no explanation outside the JSON.",
+          },
+          {
             role: "user",
-            content: imagePrompt,
+            content: prompt,
           },
         ],
-        modalities: ["image", "text"],
       }),
     });
 
@@ -76,38 +86,31 @@ Ultra high resolution, 16:9 aspect ratio suitable for studying.`;
       }
       const errorText = await response.text();
       console.error("AI gateway error:", response.status, errorText);
-      throw new Error("Failed to generate notes image");
+      throw new Error("Failed to generate notes");
     }
 
     const data = await response.json();
-    console.log("AI response received");
-
-    // Extract images from the response
-    const images: string[] = [];
-    const message = data.choices?.[0]?.message;
+    let content = data.choices?.[0]?.message?.content || "";
     
-    if (message?.images && Array.isArray(message.images)) {
-      for (const img of message.images) {
-        if (img?.image_url?.url) {
-          images.push(img.image_url.url);
-        }
-      }
+    // Clean up potential markdown fences
+    content = content.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
+    
+    let pages;
+    try {
+      pages = JSON.parse(content);
+    } catch (e) {
+      console.error("Failed to parse AI response:", content);
+      throw new Error("Failed to parse generated notes");
     }
 
-    if (images.length === 0) {
-      console.error("No images found in response:", JSON.stringify(data));
-      throw new Error("No images generated");
+    if (!Array.isArray(pages) || pages.length === 0) {
+      throw new Error("Invalid notes format received");
     }
 
-    console.log(`Generated ${images.length} image(s) for ${topic}`);
+    console.log(`Generated ${pages.length} pages for ${topic}`);
 
     return new Response(
-      JSON.stringify({ 
-        images,
-        topic,
-        subject,
-        className 
-      }),
+      JSON.stringify({ pages, topic, subject, className }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error: unknown) {
