@@ -79,6 +79,128 @@ export type Database = {
         }
         Relationships: []
       }
+      exam_questions: {
+        Row: {
+          answered_at: string | null
+          correct_answer: string
+          created_at: string
+          difficulty: string
+          explanation: string | null
+          id: string
+          is_correct: boolean | null
+          marks: number
+          negative_marks: number
+          options: Json
+          question_number: number
+          question_text: string
+          session_id: string
+          topic: string | null
+          user_answer: string | null
+        }
+        Insert: {
+          answered_at?: string | null
+          correct_answer: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          marks?: number
+          negative_marks?: number
+          options: Json
+          question_number: number
+          question_text: string
+          session_id: string
+          topic?: string | null
+          user_answer?: string | null
+        }
+        Update: {
+          answered_at?: string | null
+          correct_answer?: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          marks?: number
+          negative_marks?: number
+          options?: Json
+          question_number?: number
+          question_text?: string
+          session_id?: string
+          topic?: string | null
+          user_answer?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_questions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "exam_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_sessions: {
+        Row: {
+          class_level: string
+          completed_at: string | null
+          correct_answers: number
+          created_at: string
+          exam_type: string
+          id: string
+          marks_obtained: number
+          started_at: string
+          subject: string
+          tab_switches: number
+          time_limit_seconds: number
+          time_taken_seconds: number | null
+          total_marks: number
+          total_questions: number
+          unskipped: number
+          user_id: string
+          wrong_answers: number
+        }
+        Insert: {
+          class_level: string
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          exam_type: string
+          id?: string
+          marks_obtained?: number
+          started_at?: string
+          subject: string
+          tab_switches?: number
+          time_limit_seconds?: number
+          time_taken_seconds?: number | null
+          total_marks?: number
+          total_questions?: number
+          unskipped?: number
+          user_id: string
+          wrong_answers?: number
+        }
+        Update: {
+          class_level?: string
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          exam_type?: string
+          id?: string
+          marks_obtained?: number
+          started_at?: string
+          subject?: string
+          tab_switches?: number
+          time_limit_seconds?: number
+          time_taken_seconds?: number | null
+          total_marks?: number
+          total_questions?: number
+          unskipped?: number
+          user_id?: string
+          wrong_answers?: number
+        }
+        Relationships: []
+      }
       friends: {
         Row: {
           created_at: string
