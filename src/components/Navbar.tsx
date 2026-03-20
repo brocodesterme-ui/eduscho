@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { 
   User, LogOut, Trophy, Book, TrendingUp, Medal, GraduationCap, 
   Play, CalendarDays, Menu, BookOpen, FileText, MessageCircle, 
-  Sparkles, ChevronDown, X, Gamepad2, UserCircle, Mail, Share2, Target
+  Sparkles, ChevronDown, X, Gamepad2, UserCircle, Mail, Share2, Target, Zap
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
@@ -59,6 +59,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
+    { path: "/exam", icon: Zap, label: "Exam Sim" },
     { path: "/ncert", icon: Book, label: "NCERT" },
     { path: "/videos", icon: Play, label: "Videos" },
     { path: "/games", icon: Gamepad2, label: "Games" },
