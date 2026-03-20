@@ -54,7 +54,7 @@ const ExamSimulator = () => {
   const [totalTime, setTotalTime] = useState(0);
   const [tabSwitches, setTabSwitches] = useState(0);
   const [showWarning, setShowWarning] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Results
   const [results, setResults] = useState<{
