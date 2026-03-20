@@ -20,6 +20,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Challenge from "./pages/Challenge";
 import Flashcards from "./pages/Flashcards";
 import Notes from "./pages/Notes";
+import ExamSimulator from "./pages/ExamSimulator";
 import StudentChat from "./pages/StudentChat";
 import PrivateMessages from "./pages/PrivateMessages";
 import ShareApp from "./pages/ShareApp";
