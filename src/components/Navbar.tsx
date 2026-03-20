@@ -59,6 +59,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
+    { path: "/exam", icon: Zap, label: "Exam Sim" },
     { path: "/ncert", icon: Book, label: "NCERT" },
     { path: "/videos", icon: Play, label: "Videos" },
     { path: "/games", icon: Gamepad2, label: "Games" },
