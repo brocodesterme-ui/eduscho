@@ -79,9 +79,9 @@ const Index = () => {
   ];
 
   const showcaseFeatures = [
+    { icon: Target, title: "AI Exam Simulator", description: "Full mock exams with timer, proctoring, negative marking & instant analytics — only on EduScho", color: "from-rose-500 to-red-600" },
     { icon: Mic, title: "Voice Conversations", description: "Talk naturally with AI teachers using voice — just like a real classroom", color: "from-violet-500 to-purple-600" },
     { icon: Brain, title: "Adaptive Quizzes", description: "AI adjusts difficulty in real-time based on your performance", color: "from-blue-500 to-cyan-500" },
-    { icon: Globe, title: "Multilingual Support", description: "Learn in your preferred language with seamless translation", color: "from-emerald-500 to-teal-500" },
     { icon: Shield, title: "Safe & Private", description: "Your data stays secure with end-to-end encryption", color: "from-amber-500 to-orange-500" },
   ];
 
