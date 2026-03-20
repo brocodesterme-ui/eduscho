@@ -52,6 +52,7 @@ const AnimatedRoutes = () => {
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/flashcards" element={<Flashcards />} />
         <Route path="/notes" element={<Notes />} />
+        <Route path="/exam" element={<ExamSimulator />} />
         <Route path="/student-chat" element={<StudentChat />} />
         <Route path="/messages" element={<PrivateMessages />} />
         <Route path="/share" element={<ShareApp />} />
