@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { 
   Calculator, Atom, BookOpen, GraduationCap, Trophy, Book, ArrowRight, 
@@ -512,11 +512,11 @@ const Index = () => {
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">EduVoice</span>
             </div>
             <p className="text-muted-foreground text-center text-sm">
-              © 2025 EduVoice. Empowering students with AI.
+              © 2026 EduVoice. Empowering students with AI.
             </p>
             <div className="flex gap-2">
-              <Button variant="ghost" size="sm" className="rounded-full text-muted-foreground hover:text-foreground">Privacy</Button>
-              <Button variant="ghost" size="sm" className="rounded-full text-muted-foreground hover:text-foreground">Terms</Button>
+              <Link to="/privacy"><Button variant="ghost" size="sm" className="rounded-full text-muted-foreground hover:text-foreground">Privacy</Button></Link>
+              <Link to="/terms"><Button variant="ghost" size="sm" className="rounded-full text-muted-foreground hover:text-foreground">Terms</Button></Link>
               <Button variant="ghost" size="sm" className="rounded-full text-muted-foreground hover:text-foreground">Contact</Button>
             </div>
           </div>

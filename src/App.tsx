@@ -27,6 +27,8 @@ import ShareApp from "./pages/ShareApp";
 import Profile from "./pages/Profile";
 import Games from "./pages/Games";
 import Demo from "./pages/Demo";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +62,8 @@ const AnimatedRoutes = () => {
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/games" element={<Games />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
