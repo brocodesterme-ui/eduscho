@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Send, MessageCircle, Users, Lock, Sparkles, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import { containsBadWords, MODERATION_WARNING } from "@/utils/contentModeration";
 
 interface Message {
   id: string;
@@ -150,6 +151,12 @@ const StudentChat = () => {
 
   const handleSend = async () => {
     if (!newMessage.trim() || !user) return;
+
+    // Content moderation check
+    if (containsBadWords(newMessage)) {
+      toast.error(MODERATION_WARNING);
+      return;
+    }
 
     setIsLoading(true);
     const { error } = await supabase.from("student_messages").insert({

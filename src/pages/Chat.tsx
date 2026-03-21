@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Send, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { containsBadWords, MODERATION_WARNING } from "@/utils/contentModeration";
 
 interface Message {
   role: "user" | "assistant";
@@ -160,6 +161,16 @@ const Chat = () => {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
+    
+    if (containsBadWords(input)) {
+      toast({
+        title: "Message Blocked",
+        description: MODERATION_WARNING,
+        variant: "destructive",
+      });
+      return;
+    }
+    
     const message = input.trim();
     setInput("");
     await streamChat(message);
