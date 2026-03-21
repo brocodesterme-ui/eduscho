@@ -151,6 +151,12 @@ const StudentChat = () => {
   const handleSend = async () => {
     if (!newMessage.trim() || !user) return;
 
+    // Content moderation check
+    if (containsBadWords(newMessage)) {
+      toast.error(MODERATION_WARNING);
+      return;
+    }
+
     setIsLoading(true);
     const { error } = await supabase.from("student_messages").insert({
       user_id: user.id,
