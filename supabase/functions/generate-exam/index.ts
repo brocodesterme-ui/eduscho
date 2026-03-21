@@ -65,8 +65,9 @@ Return ONLY valid JSON array. No markdown fences. Each object must have:
       },
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
+        max_tokens: 16000,
         messages: [
-          { role: "system", content: "You generate exam questions. Respond with valid JSON only. No markdown, no code fences." },
+          { role: "system", content: "You generate exam questions. Respond with valid JSON only. No markdown, no code fences. Keep explanations under 50 words each." },
           { role: "user", content: prompt },
         ],
       }),
@@ -88,12 +89,25 @@ Return ONLY valid JSON array. No markdown fences. Each object must have:
     let content = data.choices?.[0]?.message?.content || "";
     content = content.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
 
+    // Try to extract a valid JSON array even if truncated
     let questions;
     try {
       questions = JSON.parse(content);
     } catch {
-      console.error("Parse failed:", content.substring(0, 500));
-      throw new Error("Failed to parse exam questions");
+      // Attempt to salvage truncated JSON by finding the last complete object
+      const lastCompleteObj = content.lastIndexOf("}");
+      if (lastCompleteObj !== -1) {
+        const trimmed = content.substring(0, lastCompleteObj + 1) + "]";
+        try {
+          questions = JSON.parse(trimmed);
+        } catch {
+          console.error("Parse failed even after trimming:", content.substring(0, 500));
+          throw new Error("Failed to parse exam questions. Please try again.");
+        }
+      } else {
+        console.error("Parse failed:", content.substring(0, 500));
+        throw new Error("Failed to parse exam questions. Please try again.");
+      }
     }
 
     if (!Array.isArray(questions) || questions.length === 0) {
