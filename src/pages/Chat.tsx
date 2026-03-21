@@ -161,6 +161,16 @@ const Chat = () => {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
+    
+    if (containsBadWords(input)) {
+      toast({
+        title: "Message Blocked",
+        description: MODERATION_WARNING,
+        variant: "destructive",
+      });
+      return;
+    }
+    
     const message = input.trim();
     setInput("");
     await streamChat(message);
