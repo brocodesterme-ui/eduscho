@@ -62,6 +62,8 @@ const AnimatedRoutes = () => {
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/games" element={<Games />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
