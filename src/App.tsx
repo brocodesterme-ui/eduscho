@@ -27,6 +27,8 @@ import ShareApp from "./pages/ShareApp";
 import Profile from "./pages/Profile";
 import Games from "./pages/Games";
 import Demo from "./pages/Demo";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
